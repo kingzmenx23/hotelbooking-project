@@ -1,0 +1,993 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">    
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Maison Royale | Luxury Hotel</title>
+
+    <link rel="stylesheet" href="{% static 'css/userpage.css' %}">
+    
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+<!-- =========================================================
+     TOP ANNOUNCEMENT BAR
+========================================================= -->
+
+<div class="announcement" id="announcement">
+    <p>Exclusive summer experiences · Book directly with us</p>
+
+    <button id="closeAnnouncement" aria-label="Close announcement">
+        ×
+    </button>
+</div>
+
+
+<!-- =========================================================
+     NAVBAR
+========================================================= -->
+
+<header class="navbar" id="navbar">
+
+    <div class="nav-left">
+        <button class="menu-btn" id="menuBtn">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+
+        <span class="menu-label">MENU</span>
+    </div>
+
+
+    <a href="#" class="logo">
+        MAISON
+        <small>ROYALE</small>
+    </a>
+
+
+    <div class="nav-right">
+
+
+        {% if request.session.username %}
+
+            <span class="nav-link">
+                WELCOME, {{ request.session.username }}
+            </span>
+            <a href="{% url 'logout' %}" class="nav-link">
+            LOGOUT
+            </a>
+            <!-- <p style="color: red;">
+            SESSION TEST: {{ request.session.username }}
+            </p> -->
+
+        {% else %}
+
+            <button class="nav-link" id="loginBtn">
+                LOGIN
+            </button>
+
+            <button class="nav-link" id="registerBtn">
+                REGISTER
+            </button>
+
+        {% endif %}
+
+
+    </div>
+
+</header>
+
+
+<!-- =========================================================
+     SIDE MENU
+========================================================= -->
+
+<div class="side-menu" id="sideMenu">
+
+    <button class="close-menu" id="closeMenu">
+        ×
+    </button>
+
+    <div class="side-content">
+
+        <span class="menu-small">
+            MAISON ROYALE
+        </span>
+
+        <nav>
+
+            <a href="#home">HOME</a>
+
+            <a href="#rooms">ROOMS & SUITES</a>
+
+            <a href="#dining">DINING</a>
+
+            <a href="#spa">SPA & WELLNESS</a>
+
+            <a href="#experiences">EXPERIENCES</a>
+
+            <a href="#offers">OFFERS</a>
+
+            <a href="#gallery">GALLERY</a>
+
+            <a href="#location">LOCATION</a>
+
+            <a href="#contact">CONTACT</a>
+
+        </nav>
+
+        <div class="side-bottom">
+
+            <a href="#" id="sideLogin">LOGIN</a>
+
+            <a href="#">REGISTER</a>
+
+        </div>
+
+    </div>
+
+</div>
+
+<div class="menu-overlay" id="menuOverlay"></div>
+
+
+<!-- =========================================================
+     HERO
+========================================================= -->
+
+<main>
+
+<section class="hero" id="home">
+
+    <div class="hero-bg"></div>
+
+    <div class="hero-overlay"></div>
+
+
+    <div class="hero-content">
+
+        <span class="hero-small">
+            NEW YORK · FIFTH AVENUE
+        </span>
+
+        <h1>
+            A WORLD<br>
+            OF ELEGANCE
+        </h1>
+
+        <p>
+            An extraordinary stay in the heart of the city.
+        </p>
+
+        <button class="hero-btn">
+            DISCOVER THE HOTEL
+        </button>
+
+    </div>
+
+
+    <!-- BOOKING BAR -->
+
+    <form method="get" action="{% url 'availability' %}" class="booking-bar">
+
+        <div class="booking-bar">
+
+        <form action="{% url 'availability' %}" method="GET">
+
+            <div class="booking-item">
+
+                <span>DESTINATION</span>
+
+                <strong>
+                    Maison Royale
+                </strong>
+
+            </div>
+
+
+            <div class="booking-item">
+
+                <span>CHECK-IN</span>
+
+                <input
+                    type="date"
+                    id="checkIn"
+                    name="check_in"
+
+                >
+
+            </div>
+
+
+            <div class="booking-item">
+
+                <span>CHECK-OUT</span>
+
+                <input
+                    type="date"
+                    id="checkOut"
+                    name="check_out"
+                >
+
+            </div>
+
+
+            <div class="booking-item">
+
+                <span>GUESTS</span>
+
+                <select id="guests" name="guests">
+
+                    <option>1 Guest</option>
+                    <option selected>2 Guests</option>
+                    <option>3 Guests</option>
+                    <option>4 Guests</option>
+                    <option>5+ Guests</option>
+
+                </select>
+
+        </div>
+
+        
+        <button class="availability-btn" class="availability-btn" id="availabilityBtn" type="submit">
+            CHECK AVAILABILITY
+        </button>
+
+
+        </form>
+
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     INTRODUCTION
+========================================================= -->
+
+<section class="intro">
+
+    <div class="section-label">
+        THE HOTEL
+    </div>
+
+    <div class="intro-grid">
+
+        <div>
+
+            <h2>
+                WHERE TIMELESS
+                <br>
+                ELEGANCE MEETS
+                <br>
+                MODERN LUXURY
+            </h2>
+
+        </div>
+
+
+        <div class="intro-text">
+
+            <p>
+                Welcome to Maison Royale, an urban sanctuary
+                designed for those who appreciate exceptional
+                service, beautiful spaces and unforgettable
+                experiences.
+            </p>
+
+            <p>
+                From elegantly appointed rooms to destination
+                dining and restorative wellness experiences,
+                every detail has been thoughtfully created.
+            </p>
+
+            <a href="#rooms" class="text-link">
+                DISCOVER MORE →
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     ROOMS
+========================================================= -->
+
+<section class="rooms section" id="rooms">
+
+    <div class="section-heading">
+
+        <div>
+
+            <span class="section-label">
+                STAY WITH US
+            </span>
+
+            <h2>
+                ROOMS & SUITES
+            </h2>
+
+        </div>
+
+        <a href="{% url 'availability' %}" class="text-link">
+            VIEW ALL ROOMS →
+        </a>
+
+    </div>
+
+
+    <div class="room-grid">
+
+
+        <article class="room-card">
+
+            <div class="room-image room-1"></div>
+
+            <div class="room-info">
+
+                <span>
+                    01 · DELUXE
+                </span>
+
+                <h3>
+                    The Deluxe Room
+                </h3>
+
+                <p>
+                    Elegant interiors with expansive
+                    city views.
+                </p>
+
+                <a href="{% url 'room_detail' 'deluxe' %}">
+                    EXPLORE ROOM →
+                </a>
+
+            </div>
+
+        </article>
+
+
+        <article class="room-card">
+
+            <div class="room-image room-2"></div>
+
+            <div class="room-info">
+
+                <span>
+                    02 · EXECUTIVE
+                </span>
+
+                <h3>
+                    Executive Residence
+                </h3>
+
+                <p>
+                    Spacious living designed for extended
+                    stays.
+                </p>
+
+                <a href="{% url 'room_detail' 'executive' %}">
+                    EXPLORE ROOM →
+                </a>
+
+            </div>
+
+        </article>
+
+
+        <article class="room-card">
+
+            <div class="room-image room-3"></div>
+
+            <div class="room-info">
+
+                <span>
+                    03 · SUITE
+                </span>
+
+                <h3>
+                    The Grand Suite
+                </h3>
+
+                <p>
+                    A private sanctuary above the city.
+                </p>
+
+                <a href="{% url 'room_detail' 'grand-suite' %}">
+                    EXPLORE ROOM →
+                </a>
+
+            </div>
+
+        </article>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     FEATURE IMAGE
+========================================================= -->
+
+<section class="feature-image">
+
+    <div class="feature-overlay"></div>
+
+    <div class="feature-content">
+
+        <span>
+            THE MAISON EXPERIENCE
+        </span>
+
+        <h2>
+            MORE THAN<br>
+            A HOTEL
+        </h2>
+
+        <button>
+            EXPLORE
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     DINING
+========================================================= -->
+
+<section class="split-section" id="dining">
+
+    <div class="split-image dining-image"></div>
+
+    <div class="split-content">
+
+        <span class="section-label">
+            DINING
+        </span>
+
+        <h2>
+            A TABLE<br>
+            WORTH TRAVELLING FOR
+        </h2>
+
+        <p>
+            Discover refined cuisine, seasonal ingredients
+            and unforgettable evenings in our signature
+            restaurant.
+        </p>
+
+        <a href="#" class="text-link">
+            DISCOVER DINING →
+        </a>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     SPA
+========================================================= -->
+
+<section class="split-section reverse" id="spa">
+
+    <div class="split-image spa-image"></div>
+
+    <div class="split-content">
+
+        <span class="section-label">
+            WELLNESS
+        </span>
+
+        <h2>
+            RESTORE.<br>
+            RECHARGE.<br>
+            RECONNECT.
+        </h2>
+
+        <p>
+            Escape the energy of the city and enter a world
+            dedicated to relaxation and wellbeing.
+        </p>
+
+        <a href="#" class="text-link">
+            EXPLORE WELLNESS →
+        </a>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     OFFERS
+========================================================= -->
+
+<section class="offers section" id="offers">
+
+    <div class="section-heading">
+
+        <div>
+
+            <span class="section-label">
+                SPECIAL OFFERS
+            </span>
+
+            <h2>
+                CURATED FOR YOU
+            </h2>
+
+        </div>
+
+    </div>
+
+
+    <div class="offer-grid">
+
+
+        <article class="offer-card">
+
+            <div class="offer-image offer-1"></div>
+
+            <div class="offer-content">
+
+                <span>
+                    WEEKEND
+                </span>
+
+                <h3>
+                    The City Escape
+                </h3>
+
+                <p>
+                    Enjoy a luxurious weekend surrounded
+                    by everything the city has to offer.
+                </p>
+
+                <a href="#">
+                    VIEW OFFER →
+                </a>
+
+            </div>
+
+        </article>
+
+
+        <article class="offer-card">
+
+            <div class="offer-image offer-2"></div>
+
+            <div class="offer-content">
+
+                <span>
+                    LONG STAY
+                </span>
+
+                <h3>
+                    Stay A Little Longer
+                </h3>
+
+                <p>
+                    Make yourself at home with exclusive
+                    benefits for extended stays.
+                </p>
+
+                <a href="#">
+                    VIEW OFFER →
+                </a>
+
+            </div>
+
+        </article>
+
+
+        <article class="offer-card">
+
+            <div class="offer-image offer-3"></div>
+
+            <div class="offer-content">
+
+                <span>
+                    ROMANCE
+                </span>
+
+                <h3>
+                    An Evening Together
+                </h3>
+
+                <p>
+                    Create unforgettable memories with
+                    someone special.
+                </p>
+
+                <a href="#">
+                    VIEW OFFER →
+                </a>
+
+            </div>
+
+        </article>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     EXPERIENCES
+========================================================= -->
+
+<section class="experience" id="experiences">
+
+    <div class="experience-content">
+
+        <span>
+            BEYOND THE HOTEL
+        </span>
+
+        <h2>
+            EXPERIENCE<br>
+            NEW YORK
+        </h2>
+
+        <p>
+            Discover hidden streets, iconic landmarks,
+            exceptional shopping and unforgettable
+            cultural experiences.
+        </p>
+
+        <button>
+            EXPLORE EXPERIENCES
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     GALLERY
+========================================================= -->
+
+<section class="gallery section" id="gallery">
+
+    <div class="section-heading">
+
+        <div>
+
+            <span class="section-label">
+                INSIDE MAISON ROYALE
+            </span>
+
+            <h2>
+                GALLERY
+            </h2>
+
+        </div>
+
+    </div>
+
+
+    <div class="gallery-grid">
+
+        <div class="gallery-item gallery-1"></div>
+
+        <div class="gallery-item gallery-2"></div>
+
+        <div class="gallery-item gallery-3"></div>
+
+        <div class="gallery-item gallery-4"></div>
+
+        <div class="gallery-item gallery-5"></div>
+
+        <div class="gallery-item gallery-6"></div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     LOCATION
+========================================================= -->
+
+<section class="location" id="location">
+
+    <div class="location-content">
+
+        <span class="section-label">
+            LOCATION
+        </span>
+
+        <h2>
+            AT THE HEART<br>
+            OF THE CITY
+        </h2>
+
+        <p>
+            Fifth Avenue · Midtown Manhattan
+        </p>
+
+        <a href="#">
+            GET DIRECTIONS →
+        </a>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     NEWSLETTER
+========================================================= -->
+
+<section class="newsletter">
+
+    <span>
+        STAY CONNECTED
+    </span>
+
+    <h2>
+        JOIN OUR WORLD
+    </h2>
+
+    <p>
+        Receive news, offers and inspiration from
+        Maison Royale.
+    </p>
+
+    <form id="newsletterForm">
+
+        <input
+            type="email"
+            id="newsletterEmail"
+            placeholder="Your email address"
+            required
+        >
+
+        <button type="submit">
+            SUBSCRIBE
+        </button>
+
+    </form>
+
+</section>
+
+
+</main>
+
+
+<!-- =========================================================
+     FOOTER
+========================================================= -->
+
+<footer id="contact">
+
+    <div class="footer-main">
+
+        <div class="footer-brand">
+
+            <a href="#" class="logo footer-logo">
+                MAISON
+                <small>ROYALE</small>
+            </a>
+
+            <p>
+                A timeless expression of luxury,
+                hospitality and extraordinary experiences.
+            </p>
+
+        </div>
+
+
+        <div class="footer-column">
+
+            <h4>HOTEL</h4>
+
+            <a href="#rooms">Rooms & Suites</a>
+
+            <a href="#dining">Dining</a>
+
+            <a href="#spa">Spa & Wellness</a>
+
+            <a href="#experiences">Experiences</a>
+
+        </div>
+
+
+        <div class="footer-column">
+
+            <h4>DISCOVER</h4>
+
+            <a href="#offers">Offers</a>
+
+            <a href="#gallery">Gallery</a>
+
+            <a href="#location">Location</a>
+
+            <a href="#">Contact</a>
+
+        </div>
+
+
+        <div class="footer-column">
+
+            <h4>CONTACT</h4>
+
+            <p>
+                Fifth Avenue<br>
+                New York, NY
+            </p>
+
+            <p>
+                +1 212 000 0000
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div class="footer-bottom">
+
+        <span>
+            © 2026 Maison Royale
+        </span>
+
+        <div>
+
+            <a href="#">Privacy</a>
+
+            <a href="#">Terms</a>
+
+            <a href="#">Instagram</a>
+
+        </div>
+
+    </div>
+
+</footer>
+
+
+<!-- =========================================================
+     LOGIN MODAL
+========================================================= -->
+
+<div class="modal" id="loginModal">
+
+    <div class="modal-box">
+
+        <button class="modal-close" id="closeLogin">
+            ×
+        </button>
+
+        <span class="section-label">
+            WELCOME BACK
+        </span>
+
+        <h2>
+            LOGIN
+        </h2>
+
+        <form method="post" action="{% url 'login' %}">
+            {% csrf_token %}
+
+            <input
+                type="email"
+                name="email"
+                placeholder="Email address"
+                required
+            >
+
+            <input
+                type="password"
+                name="password"
+                placeholder="Password"
+                required
+            >
+
+            <button type="submit">
+                LOGIN
+            </button>
+
+        </form>
+
+        <p>
+            Don't have an account?
+            <a href="#" id="openRegister">
+                Register
+            </a>
+        </p>
+
+    </div>
+
+</div>
+
+
+<!-- =========================================================
+     REGISTER MODAL
+========================================================= -->
+
+<div class="modal" id="registerModal" >
+
+    <div class="modal-box">
+
+        <button class="modal-close" id="closeRegister">
+            ×
+        </button>
+
+        <span class="section-label">
+            JOIN US
+        </span>
+
+        <h2>
+            REGISTER
+        </h2>
+
+        <form method="post">
+            {% csrf_token %}
+
+            <input
+                type="text"
+                placeholder="Full name"
+                name="name"
+                required
+            >
+
+            <input
+                type="email"
+                placeholder="Email address"
+                name="email"
+                required
+            >
+
+            <input
+                type="password"
+                placeholder="Password"
+                name="password"
+                required
+            >
+
+            <input
+                type="tel"
+                    placeholder="Mobile number"
+                    name="phn"
+                    required
+                >
+
+                <button type="submit">
+                    CREATE ACCOUNT
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+    <div id="loginStatus"
+        data-logged-in="{% if request.session.username %}true{% else %}false{% endif %}">
+    </div>
+
+
+    <script src="{% static 'js/userpage.js' %}"></script>
+
+    </body>
+    </html>

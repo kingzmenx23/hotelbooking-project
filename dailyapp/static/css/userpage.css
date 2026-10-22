@@ -1,0 +1,1488 @@
+
+/* =========================================================
+   RESET
+========================================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background: #f5f3ef;
+    color: #171717;
+    font-family: "Inter", sans-serif;
+    font-weight: 300;
+}
+
+button,
+input,
+select {
+    font-family: inherit;
+}
+
+button {
+    cursor: pointer;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+
+/* =========================================================
+   ANNOUNCEMENT
+========================================================= */
+
+.announcement {
+    height: 36px;
+    background: #151515;
+    color: white;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    position: relative;
+
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.announcement button {
+    position: absolute;
+    right: 25px;
+
+    border: none;
+    background: none;
+
+    color: white;
+    font-size: 20px;
+}
+
+
+/* =========================================================
+   NAVBAR
+========================================================= */
+.navbar {
+    height: 82px;
+    position: fixed;
+    top: 36px;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 45px;
+
+    color: white;
+
+    background: transparent;
+
+    transition: background-color 0.4s ease,
+                top 0.4s ease,
+                box-shadow 0.4s ease;
+}
+
+/* AFTER SCROLLING */
+.navbar.scrolled {
+    top: 0;
+
+    background-color: rgba(20, 20, 20, 0.96);
+
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+
+    backdrop-filter: blur(10px);
+}
+
+.nav-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.menu-btn {
+    width: 34px;
+    height: 34px;
+
+    border: none;
+    background: transparent;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+}
+
+.menu-btn span {
+    width: 25px;
+    height: 1px;
+    background: white;
+}
+
+.menu-label {
+    font-size: 10px;
+    letter-spacing: 2px;
+}
+
+.logo {
+    color: white;
+
+    font-family: "Cormorant Garamond", serif;
+
+    font-size: 30px;
+    letter-spacing: 5px;
+
+    text-align: center;
+
+    line-height: 0.7;
+}
+
+.logo small {
+    display: block;
+
+    font-family: "Inter", sans-serif;
+
+    font-size: 7px;
+    letter-spacing: 5px;
+
+    margin-top: 8px;
+}
+
+.nav-right {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.nav-link {
+    border: none;
+    background: none;
+
+    color: white;
+
+    font-size: 9px;
+    letter-spacing: 2px;
+}
+
+.book-btn {
+    border: 1px solid rgba(255,255,255,.7);
+
+    background: transparent;
+
+    color: white;
+
+    padding: 13px 20px;
+
+    font-size: 9px;
+    letter-spacing: 2px;
+
+    transition: 0.3s;
+}
+
+.book-btn:hover {
+    background: white;
+    color: black;
+}
+
+
+/* =========================================================
+   SIDE MENU
+========================================================= */
+
+.side-menu {
+    position: fixed;
+
+    top: 0;
+    left: -430px;
+
+    width: 430px;
+    height: 100vh;
+
+    background: #151515;
+
+    z-index: 2000;
+
+    color: white;
+
+    transition: left 0.5s cubic-bezier(.77,0,.18,1);
+}
+
+.side-menu.active {
+    left: 0;
+}
+
+.close-menu {
+    position: absolute;
+
+    top: 28px;
+    right: 30px;
+
+    background: none;
+    border: none;
+
+    color: white;
+
+    font-size: 35px;
+
+    font-weight: 200;
+}
+
+.side-content {
+    padding: 120px 55px;
+}
+
+.menu-small {
+    font-size: 9px;
+    letter-spacing: 3px;
+    color: #aaa;
+}
+
+.side-content nav {
+    margin-top: 45px;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.side-content nav a {
+    font-family: "Cormorant Garamond", serif;
+
+    font-size: 28px;
+
+    padding: 12px 0;
+
+    border-bottom: 1px solid #333;
+
+    transition: padding-left .3s;
+}
+
+.side-content nav a:hover {
+    padding-left: 10px;
+}
+
+.side-bottom {
+    display: flex;
+    gap: 25px;
+
+    margin-top: 40px;
+
+    font-size: 10px;
+    letter-spacing: 2px;
+}
+
+.menu-overlay {
+    position: fixed;
+
+    inset: 0;
+
+    background: rgba(0,0,0,.55);
+
+    z-index: 1500;
+
+    opacity: 0;
+    visibility: hidden;
+
+    transition: .4s;
+}
+
+.menu-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.hero {
+    height: 100vh;
+
+    min-height: 700px;
+
+    position: relative;
+
+    color: white;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hero-bg {
+    position: absolute;
+    inset: 0;
+
+    background:
+        url("https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=2200&q=90")
+        center/cover;
+
+    /* animation: heroZoom 12s ease-in-out infinite alternate; */
+}
+
+@keyframes heroZoom {
+
+    from {
+        transform: scale(1);
+    }
+
+    to {
+        transform: scale(1.06);
+    }
+
+}
+
+.hero-overlay {
+    position: absolute;
+    inset: 0;
+
+    background:
+        linear-gradient(
+            180deg,
+            rgba(0,0,0,.5),
+            rgba(0,0,0,.18) 50%,
+            rgba(0,0,0,.65)
+        );
+}
+
+.hero-content {
+    position: relative;
+
+    text-align: center;
+
+    z-index: 2;
+
+    margin-top: 50px;
+}
+
+.hero-small {
+    font-size: 10px;
+    letter-spacing: 4px;
+}
+
+.hero h1 {
+    font-family: "Cormorant Garamond", serif;
+
+    font-size: clamp(65px, 9vw, 145px);
+
+    font-weight: 400;
+
+    line-height: .75;
+
+    margin: 35px 0;
+}
+
+.hero p {
+    font-size: 14px;
+
+    letter-spacing: 1px;
+
+    margin-bottom: 30px;
+}
+
+.hero-btn {
+    padding: 15px 28px;
+
+    background: white;
+
+    border: none;
+
+    font-size: 9px;
+
+    letter-spacing: 2px;
+}
+
+
+/* =========================================================
+   BOOKING BAR
+========================================================= */
+
+.booking-bar {
+    position: absolute;
+
+    bottom: 0;
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    width: calc(100% - 90px);
+
+    max-width: 1200px;
+
+    background: #f8f6f2;
+
+    color: #222;
+
+    display: grid;
+
+    grid-template-columns:
+        1.2fr
+        1fr
+        1fr
+        1fr
+        1.2fr;
+
+    z-index: 5;
+}
+
+.booking-item {
+    padding: 20px;
+
+    border-right: 1px solid #ddd;
+}
+
+.booking-item span {
+    display: block;
+
+    font-size: 8px;
+
+    letter-spacing: 2px;
+
+    margin-bottom: 9px;
+
+    color: #777;
+}
+
+.booking-item strong {
+    font-size: 12px;
+}
+
+.booking-item input,
+.booking-item select {
+    width: 100%;
+
+    border: none;
+
+    background: transparent;
+
+    outline: none;
+
+    font-size: 12px;
+}
+
+.availability-btn {
+    border: none;
+
+    background: #171717;
+
+    color: white;
+
+    font-size: 9px;
+
+    letter-spacing: 2px;
+}
+
+
+/* =========================================================
+   GENERAL SECTIONS
+========================================================= */
+
+.section {
+    padding: 130px 6%;
+}
+
+.section-label {
+    display: block;
+
+    font-size: 9px;
+
+    letter-spacing: 3px;
+
+    color: #777;
+}
+
+.section-heading {
+    display: flex;
+
+    align-items: end;
+
+    justify-content: space-between;
+
+    margin-bottom: 60px;
+}
+
+.section-heading h2 {
+    font-family: "Cormorant Garamond", serif;
+
+    font-size: clamp(50px, 6vw, 90px);
+
+    font-weight: 400;
+
+    line-height: .8;
+
+    margin-top: 20px;
+}
+
+.text-link {
+    font-size: 9px;
+
+    letter-spacing: 2px;
+
+    border-bottom: 1px solid #222;
+
+    padding-bottom: 7px;
+}
+
+
+/* =========================================================
+   INTRO
+========================================================= */
+
+.intro {
+    padding: 180px 10% 150px;
+}
+
+.intro-grid {
+    display: grid;
+
+    grid-template-columns: 1.2fr 1fr;
+
+    gap: 100px;
+
+    margin-top: 55px;
+}
+
+.intro h2 {
+    font-family: "Cormorant Garamond", serif;
+
+    font-size: clamp(50px, 6vw, 90px);
+
+    font-weight: 400;
+
+    line-height: .85;
+}
+
+.intro-text {
+    max-width: 450px;
+
+    padding-top: 10px;
+}
+
+.intro-text p {
+    line-height: 1.8;
+
+    font-size: 14px;
+
+    margin-bottom: 25px;
+}
+
+
+/* =========================================================
+   ROOMS
+========================================================= */
+
+.room-grid {
+    display: grid;
+
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 25px;
+}
+
+.room-image {
+    height: 480px;
+
+    background-size: cover;
+    background-position: center;
+
+    transition: transform .7s;
+}
+
+.room-card {
+    overflow: hidden;
+}
+
+.room-card:hover .room-image {
+    transform: scale(1.04);
+}
+
+.room-1 {
+    background-image:
+        url("https://images.unsplash.com/photo-1611892440504-42a792e24d32?auto=format&fit=crop&w=1200&q=85");
+}
+
+.room-2 {
+    background-image:
+        url("https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=1200&q=85");
+}
+
+.room-3 {
+    background-image:
+        url("https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=1200&q=85");
+}
+
+.room-info {
+    padding: 25px 5px;
+}
+
+.room-info span {
+    font-size: 8px;
+
+    letter-spacing: 2px;
+
+    color: #777;
+}
+
+.room-info h3 {
+    font-family: "Cormorant Garamond", serif;
+
+    font-size: 32px;
+
+    font-weight: 400;
+
+    margin: 10px 0;
+}
+
+.room-info p {
+    font-size: 12px;
+
+    color: #666;
+
+    margin-bottom: 20px;
+}
+
+.room-info a,
+.offer-content a {
+    font-size: 8px;
+
+    letter-spacing: 2px;
+
+    border-bottom: 1px solid #222;
+
+    padding-bottom: 6px;
+}
+
+
+/* =========================================================
+   FEATURE
+========================================================= */
+
+.feature-image {
+    height: 750px;
+
+    position: relative;
+
+    background:
+        url("https://images.unsplash.com/photo-1564501049412-61c2a3083791?auto=format&fit=crop&w=2200&q=90")
+        center/cover;
+
+    color: white;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+}
+
+.feature-overlay {
+    position: absolute;
+    inset: 0;
+
+    background: rgba(0,0,0,.4);
+}
+
+.feature-content {
+    position: relative;
+}
+
+.feature-content span {
+    font-size: 9px;
+
+    letter-spacing: 4px;
+}
+
+.feature-content h2 {
+    font-family: "Cormorant Garamond", serif;
+
+    font-size: clamp(70px, 9vw, 130px);
+
+    font-weight: 400;
+
+    line-height: .75;
+
+    margin: 30px 0;
+}
+
+.feature-content button,
+.experience button {
+    background: transparent;
+
+    color: white;
+
+    border: 1px solid white;
+
+    padding: 15px 25px;
+
+    font-size: 9px;
+
+    letter-spacing: 2px;
+}
+
+
+/* =========================================================
+   SPLIT SECTIONS
+========================================================= */
+
+.split-section {
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    min-height: 750px;
+}
+
+.split-section.reverse .split-image {
+    order: 2;
+}
+
+.split-section.reverse .split-content {
+    order: 1;
+}
+
+.split-image {
+    background-size: cover;
+    background-position: center;
+}
+
+.dining-image {
+    background-image:
+        url("https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1500&q=85");
+}
+
+.spa-image {
+    background-image:
+        url("https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1500&q=85");
+}
+
+.split-content {
+    padding: 12%;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+    background: #eeece7;
+}
+
+.split-content h2 {
+    font-family: "Cormorant Garamond", serif;
+
+    font-size: clamp(55px, 6vw, 90px);
+
+    font-weight: 400;
+
+    line-height: .8;
+
+    margin: 30px 0;
+}
+
+.split-content p {
+    max-width: 400px;
+
+    line-height: 1.8;
+
+    font-size: 13px;
+
+    color: #555;
+
+    margin-bottom: 30px;
+}
+
+.split-content .text-link {
+    align-self: flex-start;
+}
+
+
+/* =========================================================
+   OFFERS
+========================================================= */
+
+.offer-grid {
+    display: grid;
+
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 25px;
+}
+
+.offer-image {
+    height: 330px;
+
+    background-size: cover;
+    background-position: center;
+}
+
+.offer-1 {
+    background-image:
+        url("https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=1200&q=85");
+}
+
+.offer-2 {
+    background-image:
+        url("https://images.unsplash.com/photo-1566665797739-1674de7a421a?auto=format&fit=crop&w=1200&q=85");
+}
+
+.offer-3 {
+    background-image:
+        url("https://images.unsplash.com/photo-1601918774946-25832a4be0d6?auto=format&fit=crop&w=1200&q=85");
+}
+
+.offer-content {
+    padding: 25px 5px;
+}
+
+.offer-content span {
+    font-size: 8px;
+
+    letter-spacing: 2px;
+
+    color: #777;
+}
+
+.offer-content h3 {
+    font-family: "Cormorant Garamond", serif;
+
+    font-size: 34px;
+
+    font-weight: 400;
+
+    margin: 10px 0;
+}
+
+.offer-content p {
+    font-size: 12px;
+
+    line-height: 1.7;
+
+    color: #666;
+
+    margin-bottom: 20px;
+}
+
+
+/* =========================================================
+   EXPERIENCE
+========================================================= */
+
+.experience {
+    min-height: 700px;
+
+    background:
+        linear-gradient(
+            rgba(0,0,0,.45),
+            rgba(0,0,0,.45)
+        ),
+        url("https://images.unsplash.com/photo-1485871981521-5b1fd3805eee?auto=format&fit=crop&w=2200&q=90")
+        center/cover;
+
+    color: white;
+
+    display: flex;
+
+    align-items: center;
+
+    padding: 10%;
+}
+
+.experience-content {
+    max-width: 700px;
+}
+
+.experience-content > span {
+    font-size: 9px;
+
+    letter-spacing: 4px;
+}
+
+.experience h2 {
+    font-family: "Cormorant Garamond", serif;
+
+    font-size: clamp(70px, 9vw, 130px);
+
+    font-weight: 400;
+
+    line-height: .75;
+
+    margin: 30px 0;
+}
+
+.experience p {
+    max-width: 450px;
+
+    font-size: 14px;
+
+    line-height: 1.8;
+
+    margin-bottom: 30px;
+}
+
+
+/* =========================================================
+   GALLERY
+========================================================= */
+
+.gallery-grid {
+    display: grid;
+
+    grid-template-columns: 1fr 1fr 1fr;
+
+    grid-auto-rows: 300px;
+
+    gap: 12px;
+}
+
+.gallery-item {
+    background-size: cover;
+    background-position: center;
+}
+
+.gallery-1 {
+    background-image:
+        url("https://images.unsplash.com/photo-1564501049412-61c2a3083791?auto=format&fit=crop&w=1000&q=85");
+}
+
+.gallery-2 {
+    background-image:
+        url("https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=1000&q=85");
+}
+
+.gallery-3 {
+    background-image:
+        url("https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1000&q=85");
+}
+
+.gallery-4 {
+    background-image:
+        url("https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?auto=format&fit=crop&w=1000&q=85");
+}
+
+.gallery-5 {
+    background-image:
+        url("https://images.unsplash.com/photo-1578683010236-d716f9a3f461?auto=format&fit=crop&w=1000&q=85");
+}
+
+.gallery-6 {
+    background-image:
+        url("https://images.unsplash.com/photo-1590490359683-658d3d23f972?auto=format&fit=crop&w=1000&q=85");
+}
+
+
+/* =========================================================
+   LOCATION
+========================================================= */
+
+.location {
+    min-height: 650px;
+
+    background:
+        linear-gradient(
+            rgba(0,0,0,.45),
+            rgba(0,0,0,.45)
+        ),
+        url("https://images.unsplash.com/photo-1522083165195-3424ed129620?auto=format&fit=crop&w=2200&q=85")
+        center/cover;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    text-align: center;
+
+    color: white;
+}
+
+.location-content h2 {
+    font-family: "Cormorant Garamond", serif;
+
+    font-size: clamp(65px, 8vw, 120px);
+
+    font-weight: 400;
+
+    line-height: .75;
+
+    margin: 30px 0;
+}
+
+.location-content p {
+    font-size: 13px;
+
+    margin-bottom: 25px;
+}
+
+.location-content a {
+    font-size: 9px;
+
+    letter-spacing: 2px;
+
+    border-bottom: 1px solid white;
+
+    padding-bottom: 7px;
+}
+
+
+/* =========================================================
+   NEWSLETTER
+========================================================= */
+
+.newsletter {
+    padding: 120px 20px;
+
+    text-align: center;
+}
+
+.newsletter > span {
+    font-size: 9px;
+
+    letter-spacing: 3px;
+
+    color: #777;
+}
+
+.newsletter h2 {
+    font-family: "Cormorant Garamond", serif;
+
+    font-size: 80px;
+
+    font-weight: 400;
+
+    margin: 20px 0;
+}
+
+.newsletter p {
+    font-size: 13px;
+
+    color: #666;
+
+    margin-bottom: 35px;
+}
+
+.newsletter form {
+    max-width: 500px;
+
+    margin: auto;
+
+    display: flex;
+
+    border-bottom: 1px solid #555;
+}
+
+.newsletter input {
+    flex: 1;
+
+    border: none;
+
+    background: transparent;
+
+    padding: 15px 5px;
+
+    outline: none;
+}
+
+.newsletter button {
+    border: none;
+
+    background: transparent;
+
+    font-size: 9px;
+
+    letter-spacing: 2px;
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+footer {
+    background: #171717;
+
+    color: white;
+
+    padding: 80px 6% 30px;
+}
+
+.footer-main {
+    display: grid;
+
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+
+    gap: 50px;
+
+    padding-bottom: 70px;
+
+    border-bottom: 1px solid #333;
+}
+
+.footer-brand {
+    max-width: 350px;
+}
+
+.footer-logo {
+    display: inline-block;
+
+    margin-bottom: 30px;
+}
+
+.footer-brand p {
+    font-size: 12px;
+
+    line-height: 1.8;
+
+    color: #999;
+}
+
+.footer-column {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 14px;
+}
+
+.footer-column h4 {
+    font-size: 9px;
+
+    letter-spacing: 2px;
+
+    margin-bottom: 10px;
+}
+
+.footer-column a,
+.footer-column p {
+    font-size: 11px;
+
+    color: #999;
+
+    line-height: 1.6;
+}
+
+.footer-bottom {
+    display: flex;
+
+    justify-content: space-between;
+
+    padding-top: 25px;
+
+    font-size: 9px;
+
+    color: #777;
+}
+
+.footer-bottom div {
+    display: flex;
+
+    gap: 25px;
+}
+
+
+/* =========================================================
+   MODALS
+========================================================= */
+
+.modal {
+    position: fixed;
+
+    inset: 0;
+
+    background: rgba(0,0,0,.75);
+
+    z-index: 3000;
+
+    display: none;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 20px;
+}
+
+.modal.active {
+    display: flex;
+}
+
+.modal-box {
+    position: relative;
+
+    width: 420px;
+
+    max-width: 100%;
+
+    background: #f5f3ef;
+
+    padding: 55px 45px;
+
+    text-align: center;
+}
+
+.modal-box h2 {
+    font-family: "Cormorant Garamond", serif;
+
+    font-size: 65px;
+
+    font-weight: 400;
+
+    margin: 15px 0 30px;
+}
+
+.modal-box form {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 15px;
+}
+
+.modal-box input {
+    width: 100%;
+
+    padding: 15px;
+
+    border: none;
+
+    border-bottom: 1px solid #999;
+
+    background: transparent;
+
+    outline: none;
+}
+
+.modal-box form button {
+    background: #171717;
+
+    color: white;
+
+    border: none;
+
+    padding: 15px;
+
+    margin-top: 10px;
+
+    font-size: 9px;
+
+    letter-spacing: 2px;
+}
+
+.modal-box p {
+    font-size: 11px;
+
+    margin-top: 25px;
+}
+
+.modal-box p a {
+    text-decoration: underline;
+}
+
+.modal-close {
+    position: absolute;
+
+    right: 20px;
+    top: 15px;
+
+    border: none;
+
+    background: none;
+
+    font-size: 30px;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 900px) {
+
+    .navbar {
+        padding: 0 20px;
+    }
+
+    .nav-link {
+        display: none;
+    }
+
+    .menu-label {
+        display: none;
+    }
+
+    .booking-bar {
+        width: calc(100% - 30px);
+
+        grid-template-columns: 1fr 1fr;
+
+        bottom: 15px;
+    }
+
+    .booking-item {
+        border-bottom: 1px solid #ddd;
+    }
+
+    .availability-btn {
+        min-height: 60px;
+    }
+
+    .intro {
+        padding: 110px 7%;
+    }
+
+    .intro-grid {
+        grid-template-columns: 1fr;
+
+        gap: 40px;
+    }
+
+    .room-grid,
+    .offer-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .room-image {
+        height: 500px;
+    }
+
+    .split-section {
+        grid-template-columns: 1fr;
+    }
+
+    .split-section.reverse .split-image,
+    .split-section.reverse .split-content {
+        order: unset;
+    }
+
+    .split-image {
+        min-height: 500px;
+    }
+
+    .gallery-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .footer-main {
+        grid-template-columns: 1fr 1fr;
+    }
+
+}
+
+
+@media (max-width: 600px) {
+
+    .navbar {
+        height: 70px;
+
+        top: 36px;
+    }
+
+    .navbar.scrolled {
+        top: 0;
+    }
+
+    .logo {
+        font-size: 23px;
+    }
+
+    .book-btn {
+        padding: 10px;
+
+        font-size: 8px;
+    }
+
+    .side-menu {
+        width: 100%;
+        left: -100%;
+    }
+
+    .hero {
+        min-height: 850px;
+    }
+
+    .hero h1 {
+        font-size: 65px;
+    }
+
+    .booking-bar {
+        grid-template-columns: 1fr;
+
+        bottom: 10px;
+    }
+
+    .booking-item {
+        padding: 12px 15px;
+    }
+
+    .booking-item:nth-child(1) {
+        display: none;
+    }
+
+    .section {
+        padding: 90px 6%;
+    }
+
+    .section-heading {
+        align-items: flex-start;
+
+        flex-direction: column;
+
+        gap: 30px;
+    }
+
+    .feature-image {
+        height: 600px;
+    }
+
+    .newsletter h2 {
+        font-size: 60px;
+    }
+
+    .newsletter form {
+        flex-direction: column;
+
+        border-bottom: none;
+    }
+
+    .newsletter input {
+        border-bottom: 1px solid #777;
+    }
+
+    .newsletter button {
+        padding: 18px;
+
+        background: #171717;
+
+        color: white;
+
+        margin-top: 10px;
+    }
+
+    .footer-main {
+        grid-template-columns: 1fr;
+
+        gap: 40px;
+    }
+
+    .footer-bottom {
+        flex-direction: column;
+
+        gap: 20px;
+    }
+
+    .gallery-grid {
+        grid-template-columns: 1fr;
+    }
+
+}

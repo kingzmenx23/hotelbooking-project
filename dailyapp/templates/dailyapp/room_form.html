@@ -1,0 +1,50 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+        <title>Room | Maison Royale</title>
+        <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+    </head>
+    <body>
+        <header>
+            <a class="logo" href="{% url 'userpage' %}">
+                MAISON 
+                <small>ROYALE</small>
+            </a>
+            <a href="{% url 'admin_dashboard' %}">
+                BACK
+            </a>
+        </header>
+        <main>
+            <div class="form-card">
+                <span>ROOM MANAGEMENT</span>
+                <h1>{% if room %}Edit Room{% else %}Add Room{% endif %}</h1>
+                <form method="post">
+                    {% csrf_token %}
+                    <label>ROOM NUMBER
+                        <input type="number" name="room_number" value="{{ room.room_number|default:'' }}" required>
+                    </label>
+                    <label>
+                        ROOM CATEGORY
+                        <select name="room_type">
+                            {% for type in room_types %}
+                            <option value="{{ type.id }}" {% if room.room_type_id == type.id %}selected{% endif %}>
+                                {{ type.name }}
+                            </option>
+                            {% endfor %}
+                        </select>
+                    </label>
+                    <label class="check">
+                        <input type="checkbox" name="is_available" {% if not room or room.is_available %}checked{% endif %}>
+                         ROOM IS AVAILABLE
+                    </label>
+                    <button>
+                        SAVE ROOM →
+                    </button>
+                </form>
+            </div>
+        </main>
+    </body>
+</html>

@@ -1,0 +1,1020 @@
+/* =========================================================
+RESET
+========================================================= */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  }
+
+html {
+scroll-behavior: smooth;
+}
+
+body {
+background: #f5f3ef;
+color: #171717;
+font-family: "Inter", sans-serif;
+font-weight: 300;
+}
+
+button,
+input,
+select {
+font-family: inherit;
+}
+
+button {
+cursor: pointer;
+}
+
+a {
+color: inherit;
+text-decoration: none;
+}
+
+/* =========================================================
+ANNOUNCEMENT
+========================================================= */
+
+.announcement {
+height: 36px;
+
+background: #151515;
+color: white;
+
+display: flex;
+align-items: center;
+justify-content: center;
+
+position: relative;
+
+font-size: 10px;
+letter-spacing: 2px;
+text-transform: uppercase;
+
+z-index: 1100;
+
+
+}
+
+.announcement button {
+position: absolute;
+
+
+right: 25px;
+
+border: none;
+background: none;
+
+color: white;
+
+font-size: 20px;
+
+
+}
+
+/* =========================================================
+NAVBAR
+========================================================= */
+
+.navbar {
+height: 82px;
+
+position: fixed;
+
+top: 36px;
+left: 0;
+
+width: 100%;
+
+z-index: 1000;
+
+display: flex;
+align-items: center;
+justify-content: space-between;
+
+padding: 0 45px;
+
+color: white;
+
+background: transparent;
+
+transition:
+    background-color 0.4s ease,
+    top 0.4s ease,
+    box-shadow 0.4s ease;
+
+}
+
+.navbar.scrolled {
+top: 0;
+
+
+background-color: rgba(20, 20, 20, 0.96);
+
+box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+
+backdrop-filter: blur(10px);
+
+
+}
+
+.nav-left {
+display: flex;
+align-items: center;
+
+
+gap: 12px;
+
+
+}
+
+.menu-btn {
+width: 34px;
+height: 34px;
+
+
+border: none;
+background: transparent;
+
+display: flex;
+flex-direction: column;
+
+justify-content: center;
+
+gap: 5px;
+
+
+}
+
+.menu-btn span {
+width: 25px;
+height: 1px;
+
+background: white;
+
+
+}
+
+.menu-label {
+font-size: 10px;
+letter-spacing: 2px;
+}
+
+.logo {
+color: white;
+
+
+font-family: "Cormorant Garamond", serif;
+
+font-size: 30px;
+letter-spacing: 5px;
+
+text-align: center;
+
+line-height: 0.7;
+
+
+}
+
+.logo small {
+display: block;
+
+
+font-family: "Inter", sans-serif;
+
+font-size: 7px;
+
+letter-spacing: 5px;
+
+margin-top: 8px;
+
+
+}
+
+.nav-right {
+display: flex;
+align-items: center;
+
+
+gap: 15px;
+
+
+}
+
+.nav-link {
+border: none;
+background: none;
+
+
+color: white;
+
+font-size: 9px;
+
+letter-spacing: 2px;
+
+
+}
+
+.book-btn {
+border: 1px solid rgba(255,255,255,.7);
+
+
+background: transparent;
+
+color: white;
+
+padding: 13px 20px;
+
+font-size: 9px;
+
+letter-spacing: 2px;
+
+transition: 0.3s;
+
+
+}
+
+.book-btn:hover {
+background: white;
+color: black;
+}
+
+/* =========================================================
+SIDE MENU
+========================================================= */
+
+.side-menu {
+position: fixed;
+
+top: 0;
+left: -430px;
+
+width: 430px;
+height: 100vh;
+
+background: #151515;
+
+z-index: 2000;
+
+color: white;
+
+transition: left 0.5s cubic-bezier(.77,0,.18,1);
+
+
+}
+
+.side-menu.active {
+left: 0;
+}
+
+.close-menu {
+position: absolute;
+
+
+top: 28px;
+right: 30px;
+
+background: none;
+border: none;
+
+color: white;
+
+font-size: 35px;
+
+font-weight: 200;
+
+
+}
+
+.side-content {
+padding: 120px 55px;
+}
+
+.menu-small {
+font-size: 9px;
+
+
+letter-spacing: 3px;
+
+color: #aaa;
+
+
+}
+
+.side-content nav {
+margin-top: 45px;
+
+
+display: flex;
+flex-direction: column;
+
+
+}
+
+.side-content nav a {
+font-family: "Cormorant Garamond", serif;
+
+
+font-size: 28px;
+
+padding: 12px 0;
+
+border-bottom: 1px solid #333;
+
+transition: padding-left .3s;
+
+
+}
+
+.side-content nav a:hover {
+padding-left: 10px;
+}
+
+.side-bottom {
+display: flex;
+
+
+gap: 25px;
+
+margin-top: 40px;
+
+font-size: 10px;
+
+letter-spacing: 2px;
+
+
+}
+
+.menu-overlay {
+position: fixed;
+
+
+inset: 0;
+
+background: rgba(0,0,0,.55);
+
+z-index: 1500;
+
+opacity: 0;
+visibility: hidden;
+
+transition: .4s;
+
+
+}
+
+.menu-overlay.active {
+opacity: 1;
+visibility: visible;
+}
+
+/* =========================================================
+AVAILABILITY HEADER
+========================================================= */
+
+.availability-header {
+padding: 190px 6% 85px;
+
+
+text-align: center;
+
+
+}
+
+.section-label {
+display: block;
+
+
+font-size: 9px;
+
+letter-spacing: 3px;
+
+color: #777;
+
+margin-bottom: 25px;
+
+
+}
+
+.availability-header h1 {
+font-family: "Cormorant Garamond", serif;
+
+
+font-size: clamp(60px, 8vw, 105px);
+
+font-weight: 400;
+
+line-height: .8;
+
+margin-bottom: 30px;
+
+
+}
+
+.booking-summary {
+font-size: 10px;
+
+
+letter-spacing: 3px;
+
+color: #666;
+
+text-transform: uppercase;
+
+
+}
+
+.booking-summary span {
+margin: 0 10px;
+
+
+color: #aaa;
+
+
+}
+
+/* =========================================================
+ROOMS SECTION
+========================================================= */
+
+.rooms-section {
+padding: 0 6% 140px;
+
+
+max-width: 1500px;
+
+margin: auto;
+
+
+}
+
+/* =========================================================
+ROOM RESULT
+========================================================= */
+
+.room-result {
+display: grid;
+
+
+grid-template-columns: 38% 62%;
+
+min-height: 430px;
+
+border-top: 1px solid #d5d2cc;
+
+border-bottom: 1px solid #d5d2cc;
+
+margin-bottom: 35px;
+
+overflow: hidden;
+
+
+}
+
+/* =========================================================
+ROOM IMAGE
+========================================================= */
+
+.room-result-image {
+min-height: 430px;
+
+
+background-size: cover;
+background-position: center;
+
+transition: transform .8s ease;
+
+
+}
+
+.room-result:hover .room-result-image {
+transform: scale(1.025);
+}
+
+.room-image-1 {
+background-image:
+url("https://images.unsplash.com/photo-1611892440504-42a792e24d32?auto=format&fit=crop&w=1400&q=90");
+}
+
+.room-image-2 {
+background-image:
+url("https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=1400&q=90");
+}
+
+.room-image-3 {
+background-image:
+url("https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=1400&q=90");
+}
+
+/* =========================================================
+ROOM CONTENT
+========================================================= */
+
+.room-result-content {
+padding: 55px 60px;
+
+
+display: flex;
+flex-direction: column;
+
+justify-content: space-between;
+
+background: #f5f3ef;
+
+
+}
+
+.room-category {
+font-size: 8px;
+
+
+letter-spacing: 3px;
+
+color: #777;
+
+
+}
+
+.room-details h2 {
+font-family: "Cormorant Garamond", serif;
+
+
+font-size: clamp(42px, 4vw, 65px);
+
+font-weight: 400;
+
+line-height: .85;
+
+margin: 20px 0 25px;
+
+
+}
+
+.room-description {
+max-width: 500px;
+
+
+color: #666;
+
+font-size: 13px;
+
+line-height: 1.8;
+
+margin-bottom: 30px;
+
+
+}
+
+/* =========================================================
+ROOM FEATURES
+========================================================= */
+
+.room-features {
+display: flex;
+
+
+flex-wrap: wrap;
+
+gap: 0;
+
+
+}
+
+.room-features span {
+font-size: 8px;
+
+
+letter-spacing: 2px;
+
+color: #555;
+
+padding-right: 18px;
+
+margin-right: 18px;
+
+border-right: 1px solid #bbb;
+
+
+}
+
+.room-features span:last-child {
+border-right: none;
+}
+
+/* =========================================================
+ROOM BOTTOM
+========================================================= */
+
+.room-bottom {
+display: flex;
+
+
+align-items: flex-end;
+justify-content: space-between;
+
+gap: 30px;
+
+padding-top: 40px;
+
+border-top: 1px solid #ddd;
+
+
+}
+
+.room-price {
+display: flex;
+
+
+align-items: baseline;
+
+gap: 7px;
+
+white-space: nowrap;
+
+
+}
+
+.room-price strong {
+font-family: "Cormorant Garamond", serif;
+
+
+font-size: 35px;
+
+font-weight: 400;
+
+
+}
+
+.room-price span {
+font-size: 8px;
+
+
+letter-spacing: 2px;
+
+color: #777;
+
+
+}
+
+/* =========================================================
+ROOM ACTIONS
+========================================================= */
+
+.room-actions {
+display: flex;
+
+
+align-items: center;
+
+gap: 28px;
+
+
+}
+
+.view-details {
+font-size: 8px;
+
+
+letter-spacing: 2px;
+
+border-bottom: 1px solid #222;
+
+padding-bottom: 7px;
+
+transition: opacity .3s;
+
+
+}
+
+.view-details span {
+margin-left: 5px;
+
+
+font-size: 13px;
+
+
+}
+
+.view-details:hover {
+opacity: .55;
+}
+
+.book-room {
+background: #171717;
+
+
+color: white;
+
+border: 1px solid #171717;
+
+padding: 14px 22px;
+
+font-size: 8px;
+
+letter-spacing: 2px;
+
+transition: .3s;
+
+
+}
+
+.book-room:hover {
+background: transparent;
+
+
+color: #171717;
+
+
+}
+
+/* =========================================================
+FOOTER
+========================================================= */
+
+footer {
+background: #171717;
+
+
+color: white;
+
+padding: 80px 6% 30px;
+
+
+}
+
+.footer-main {
+display: grid;
+
+
+grid-template-columns: 2fr 1fr 1fr 1fr;
+
+gap: 50px;
+
+padding-bottom: 70px;
+
+border-bottom: 1px solid #333;
+
+
+}
+
+.footer-brand {
+max-width: 350px;
+}
+
+.footer-logo {
+display: inline-block;
+
+
+margin-bottom: 30px;
+
+
+}
+
+.footer-brand p {
+font-size: 12px;
+
+
+line-height: 1.8;
+
+color: #999;
+
+
+}
+
+.footer-column {
+display: flex;
+
+
+flex-direction: column;
+
+gap: 14px;
+
+
+}
+
+.footer-column h4 {
+font-size: 9px;
+
+
+letter-spacing: 2px;
+
+margin-bottom: 10px;
+
+
+}
+
+.footer-column a,
+.footer-column p {
+font-size: 11px;
+
+
+color: #999;
+
+line-height: 1.6;
+
+
+}
+
+.footer-bottom {
+display: flex;
+
+
+justify-content: space-between;
+
+padding-top: 25px;
+
+font-size: 9px;
+
+color: #777;
+
+
+}
+
+.footer-bottom div {
+display: flex;
+
+
+gap: 25px;
+
+
+}
+
+/* =========================================================
+RESPONSIVE — TABLET
+========================================================= */
+
+@media (max-width: 900px) {
+
+
+.navbar {
+    padding: 0 20px;
+}
+
+.nav-link {
+    display: none;
+}
+
+.menu-label {
+    display: none;
+}
+
+.availability-header {
+    padding: 160px 6% 70px;
+}
+
+.rooms-section {
+    padding: 0 4% 100px;
+}
+
+.room-result {
+    grid-template-columns: 1fr;
+
+    min-height: auto;
+}
+
+.room-result-image {
+    min-height: 450px;
+}
+
+.room-result-content {
+    min-height: 390px;
+
+    padding: 45px;
+}
+
+.footer-main {
+    grid-template-columns: 1fr 1fr;
+}
+
+
+}
+
+/* =========================================================
+RESPONSIVE — MOBILE
+========================================================= */
+
+@media (max-width: 600px) {
+
+
+.navbar {
+    height: 70px;
+
+    top: 36px;
+
+    padding: 0 15px;
+}
+
+.navbar.scrolled {
+    top: 0;
+}
+
+.logo {
+    font-size: 23px;
+}
+
+.book-btn {
+    padding: 10px;
+
+    font-size: 8px;
+}
+
+.side-menu {
+    width: 100%;
+
+    left: -100%;
+}
+
+.availability-header {
+    padding: 135px 20px 65px;
+}
+
+.availability-header h1 {
+    font-size: 58px;
+
+    line-height: .8;
+}
+
+.booking-summary {
+    font-size: 9px;
+
+    letter-spacing: 2px;
+}
+
+.rooms-section {
+    padding: 0 15px 80px;
+}
+
+.room-result {
+    margin-bottom: 25px;
+}
+
+.room-result-image {
+    min-height: 300px;
+}
+
+.room-result-content {
+    padding: 35px 25px;
+
+    min-height: 430px;
+}
+
+.room-details h2 {
+    font-size: 43px;
+
+    margin: 15px 0 20px;
+}
+
+.room-description {
+    font-size: 12px;
+
+    line-height: 1.7;
+}
+
+.room-features {
+    gap: 12px 0;
+}
+
+.room-features span {
+    margin-right: 12px;
+
+    padding-right: 12px;
+}
+
+.room-bottom {
+    align-items: flex-start;
+
+    flex-direction: column;
+
+    gap: 25px;
+
+    padding-top: 25px;
+}
+
+.room-actions {
+    width: 100%;
+
+    justify-content: space-between;
+
+    gap: 15px;
+}
+
+.book-room {
+    padding: 13px 18px;
+}
+
+.footer-main {
+    grid-template-columns: 1fr;
+
+    gap: 40px;
+}
+
+.footer-bottom {
+    flex-direction: column;
+
+    gap: 20px;
+}
+
+}

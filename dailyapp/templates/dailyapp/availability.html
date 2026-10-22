@@ -1,0 +1,437 @@
+{% load static %}
+
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+<title>Available Rooms | Maison Royale</title>
+
+<link rel="stylesheet" href="{% static 'css/availability.css' %}">
+
+<!-- Google Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Inter:wght@300;400;500&display=swap"
+    rel="stylesheet">
+
+
+</head>
+
+<body>
+
+
+<!-- =====================================================
+     ANNOUNCEMENT
+====================================================== -->
+
+<div class="announcement">
+    Exclusive summer experiences · Book directly with us
+
+    <button onclick="closeAnnouncement()">×</button>
+</div>
+
+
+<!-- =====================================================
+     NAVBAR
+====================================================== -->
+
+<header class="navbar" id="navbar">
+
+    <div class="nav-left">
+
+        <button class="menu-btn" id="menuBtn">
+            <span></span>
+            <span></span>
+        </button>
+
+        <span class="menu-label">MENU</span>
+
+    </div>
+
+
+    <a href="{% url 'userpage' %}" class="logo">
+        MAISON
+        <small>ROYALE</small>
+    </a>
+
+
+    <div class="nav-right">
+
+        {% if request.session.username %}
+
+            <span class="nav-link">
+                WELCOME, {{ request.session.username|upper }}
+            </span>
+
+            <a href="{% url 'logout' %}" class="nav-link">
+                LOGOUT
+            </a>
+
+        {% else %}
+
+            <a href="{% url 'userpage' %}" class="nav-link">
+                LOGIN
+            </a>
+
+            <a href="{% url 'userpage' %}" class="nav-link">
+                REGISTER
+            </a>
+
+        {% endif %}
+
+        <a
+    href="{% url 'booking' %}?room_type={{ room_type.id }}"
+    class="book-room"
+>
+            BOOK NOW
+        </a>
+
+    </div>
+
+</header>
+
+
+<!-- =====================================================
+     SIDE MENU
+====================================================== -->
+
+<div class="menu-overlay" id="menuOverlay"></div>
+
+<aside class="side-menu" id="sideMenu">
+
+    <button class="close-menu" id="closeMenu">
+        ×
+    </button>
+
+    <div class="side-content">
+
+        <span class="menu-small">
+            MAISON ROYALE
+        </span>
+
+        <nav>
+
+            <a href="{% url 'userpage' %}">
+                HOME
+            </a>
+
+            <a href="#rooms">
+                ROOMS
+            </a>
+
+            <a href="#">
+                DINING
+            </a>
+
+            <a href="#">
+                SPA
+            </a>
+
+            <a href="#">
+                EXPERIENCES
+            </a>
+
+            <a href="#">
+                CONTACT
+            </a>
+
+        </nav>
+
+        <div class="side-bottom">
+
+            <span>INSTAGRAM</span>
+            <span>FACEBOOK</span>
+
+        </div>
+
+    </div>
+
+</aside>
+
+
+<!-- =====================================================
+     AVAILABILITY HEADER
+====================================================== -->
+
+<main>
+
+<section class="availability-header">
+
+    <span class="section-label">
+        MAISON ROYALE
+    </span>
+
+    <h1>
+        AVAILABLE ROOMS
+    </h1>
+
+    <p class="booking-summary">
+        {{ check_in }}
+        <span>—</span>
+        {{ check_out }}
+
+        <span>·</span>
+
+        {{ guests }} GUESTS
+    </p>
+
+</section>
+
+
+    <!-- =================================================
+         ROOM RESULTS
+    ================================================== -->
+
+<section class="rooms-section" id="rooms">
+
+    {% for room_type in rooms %}
+
+    <article class="room-result">
+
+        <!-- ROOM IMAGE -->
+        <div class="room-result-image room-image-{{ forloop.counter }}">
+        </div>
+
+
+        <!-- ROOM CONTENT -->
+        <div class="room-result-content">
+
+            <div class="room-details">
+
+                <span class="room-category">
+                    {{ room_type.name }}
+                </span>
+
+                <h2>
+                    {{ room_type.name }}
+                </h2>
+
+                <p class="room-description">
+                    {{ room_type.description }}
+                </p>
+
+            </div>
+
+
+            <!-- BOTTOM -->
+            <div class="room-bottom">
+
+                <div class="room-price">
+
+                    <strong>
+                        ₹{{ room_type.price }}
+                    </strong>
+
+                    <span>
+                        / NIGHT
+                    </span>
+
+                </div>
+
+
+                <div class="room-actions">
+
+                    <a href="{% url 'room_detail' room_type.name|slugify %}" class="view-details">
+                        VIEW DETAILS
+                        <span>→</span>
+                    </a>
+
+<a
+    href="{% url 'booking' %}?room_type={{ room_type.id }}"
+    class="book-room"
+>
+    BOOK NOW
+</a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </article>
+
+    {% empty %}
+
+    <p>
+        No room types are currently available.
+    </p>
+
+    {% endfor %}
+
+</section>
+
+
+<!-- =====================================================
+     FOOTER
+====================================================== -->
+
+<footer>
+
+    <div class="footer-main">
+
+        <div class="footer-brand">
+
+            <a href="{% url 'userpage' %}" class="logo footer-logo">
+                MAISON
+                <small>ROYALE</small>
+            </a>
+
+            <p>
+                A timeless destination created for refined
+                stays, meaningful experiences and exceptional
+                hospitality.
+            </p>
+
+        </div>
+
+
+        <div class="footer-column">
+
+            <h4>EXPLORE</h4>
+
+            <a href="{% url 'userpage' %}">
+                HOME
+            </a>
+
+            <a href="#rooms">
+                ROOMS
+            </a>
+
+            <a href="#">
+                DINING
+            </a>
+
+            <a href="#">
+                SPA
+            </a>
+
+        </div>
+
+
+        <div class="footer-column">
+
+            <h4>CONTACT</h4>
+
+            <p>
+                Kollam, Kerala
+            </p>
+
+            <p>
+                +91 00000 00000
+            </p>
+
+            <p>
+                stay@maisonroyale.com
+            </p>
+
+        </div>
+
+
+        <div class="footer-column">
+
+            <h4>FOLLOW</h4>
+
+            <a href="#">
+                INSTAGRAM
+            </a>
+
+            <a href="#">
+                FACEBOOK
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <div class="footer-bottom">
+
+        <span>
+            © 2026 MAISON ROYALE
+        </span>
+
+        <div>
+            <span>PRIVACY</span>
+            <span>TERMS</span>
+        </div>
+
+    </div>
+
+</footer>
+
+
+<script>
+
+    const navbar = document.getElementById("navbar");
+
+    const menuBtn = document.getElementById("menuBtn");
+    const closeMenu = document.getElementById("closeMenu");
+
+    const sideMenu = document.getElementById("sideMenu");
+    const menuOverlay = document.getElementById("menuOverlay");
+
+
+    /* NAVBAR SCROLL */
+
+    window.addEventListener("scroll", function () {
+
+        if (window.scrollY > 50) {
+            navbar.classList.add("scrolled");
+        } else {
+            navbar.classList.remove("scrolled");
+        }
+
+    });
+
+
+    /* MENU OPEN */
+
+    menuBtn.addEventListener("click", function () {
+
+        sideMenu.classList.add("active");
+        menuOverlay.classList.add("active");
+
+    });
+
+
+    /* MENU CLOSE */
+
+    closeMenu.addEventListener("click", function () {
+
+        sideMenu.classList.remove("active");
+        menuOverlay.classList.remove("active");
+
+    });
+
+
+    menuOverlay.addEventListener("click", function () {
+
+        sideMenu.classList.remove("active");
+        menuOverlay.classList.remove("active");
+
+    });
+
+
+    /* ANNOUNCEMENT */
+
+    function closeAnnouncement() {
+
+        document.querySelector(".announcement").style.display = "none";
+
+        navbar.classList.add("announcement-closed");
+
+    }
+
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,546 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Admin Panel | Maison Royale</title>
+
+    <link rel="stylesheet" href="{% static 'css/admin.css' %}">
+
+</head>
+
+<body>
+
+    <!-- HEADER -->
+    <header class="admin-header">
+
+        <div class="brand">
+            <span>MAISON</span>
+            <small>ROYALE</small>
+        </div>
+
+        <div class="admin-info">
+
+            <span>
+                ADMIN · {{ request.session.staff_username }}
+            </span>
+
+            <a href="{% url 'logout' %}">
+                LOGOUT
+            </a>
+
+        </div>
+
+    </header>
+
+
+    <!-- MAIN -->
+    <main class="admin-container">
+
+        <!-- PAGE INTRO -->
+        <section class="admin-intro">
+
+            <span class="section-label">
+                HOTEL MANAGEMENT
+            </span>
+
+            <h1>
+                ADMIN CONTROL PANEL
+            </h1>
+
+            <p>
+                Manage guests, staff, rooms and reservations
+                from one central dashboard.
+            </p>
+
+        </section>
+
+
+        <!-- STAT CARDS -->
+        <section class="stats-grid">
+
+            <div class="stat-card">
+
+                <span class="stat-label">
+                    TOTAL GUESTS
+                </span>
+
+                <strong>
+                    {{ users|length }}
+                </strong>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <span class="stat-label">
+                    STAFF MEMBERS
+                </span>
+
+                <strong>
+                    {{ staff_members|length }}
+                </strong>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <span class="stat-label">
+                    ROOMS
+                </span>
+
+                <strong>
+                    {{ rooms|length }}
+                </strong>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <span class="stat-label">
+                    BOOKINGS
+                </span>
+
+                <strong>
+                    {{ bookings|length }}
+                </strong>
+
+            </div>
+
+        </section>
+
+
+        <!-- USERS -->
+        <section class="admin-section">
+
+            <div class="section-heading">
+
+                <div>
+                    <span class="section-label">
+                        GUEST MANAGEMENT
+                    </span>
+
+                    <h2>
+                        Registered Guests
+                    </h2>
+                </div>
+
+            </div>
+
+
+            <div class="table-wrapper">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+                            <th>ID</th>
+                            <th>NAME</th>
+                            <th>EMAIL</th>
+                            <th>PHONE</th>
+                            <th>ACTION</th>
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        {% for user in users %}
+
+                        <tr>
+
+                            <td>
+                                {{ user.pk }}
+                            </td>
+
+                            <td>
+                                {{ user.name }}
+                            </td>
+
+                            <td>
+                                {{ user.email }}
+                            </td>
+
+                            <td>
+                                {{ user.phone }}
+                            </td>
+
+                            <td>
+
+                                <form
+                                    method="POST"
+                                    action="{% url 'delete_user' user.pk %}"
+                                >
+
+                                    {% csrf_token %}
+
+                                    <button
+                                        type="submit"
+                                        class="delete-btn"
+                                        onclick="return confirm('Delete this guest?');"
+                                    >
+                                        DELETE
+                                    </button>
+
+                                </form>
+
+                            </td>
+
+                        </tr>
+
+                        {% empty %}
+
+                        <tr>
+                            <td colspan="5">
+                                No registered guests found.
+                            </td>
+                        </tr>
+
+                        {% endfor %}
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+
+        <!-- STAFF -->
+        <section class="admin-section">
+
+            <div class="section-heading">
+
+                <div>
+                    <span class="section-label">
+                        STAFF MANAGEMENT
+                    </span>
+
+                    <h2>
+                        Hotel Staff
+                    </h2>
+                </div>
+
+            </div>
+
+
+            <div class="table-wrapper">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+                            <th>NAME</th>
+                            <th>USERNAME</th>
+                            <th>ROLE</th>
+                            <th>STATUS</th>
+                            <th>ACTION</th>
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        {% for staff in staff_members %}
+
+                        <tr>
+
+                            <td>
+                                {{ staff.name }}
+                            </td>
+
+                            <td>
+                                {{ staff.username }}
+                            </td>
+
+                            <td>
+                                {{ staff.role|upper }}
+                            </td>
+
+                            <td>
+
+                                {% if staff.active %}
+                                    <span class="status active">
+                                        ACTIVE
+                                    </span>
+                                {% else %}
+                                    <span class="status inactive">
+                                        INACTIVE
+                                    </span>
+                                {% endif %}
+
+                            </td>
+
+                            <td>
+
+                                {% if staff.id != request.session.staff_id %}
+
+                                <form
+                                    method="POST"
+                                    action="{% url 'delete_staff' staff.pk %}"
+                                >
+
+                                    {% csrf_token %}
+
+                                    <button
+                                        type="submit"
+                                        class="delete-btn"
+                                        onclick="return confirm('Delete this staff member?');"
+                                    >
+                                        DELETE
+                                    </button>
+
+                                </form>
+
+                                {% else %}
+
+                                    <span class="current-admin">
+                                        CURRENT ADMIN
+                                    </span>
+
+                                {% endif %}
+
+                            </td>
+
+                        </tr>
+
+                        {% empty %}
+
+                        <tr>
+                            <td colspan="5">
+                                No staff members found.
+                            </td>
+                        </tr>
+
+                        {% endfor %}
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+
+        <!-- ROOMS -->
+        <section class="admin-section">
+
+            <div class="section-heading">
+
+                <div>
+                    <span class="section-label">
+                        ROOM MANAGEMENT
+                    </span>
+
+                    <h2>
+                        Hotel Rooms
+                    </h2>
+                </div>
+
+                <a href="{% url 'room_add' %}" class="primary-btn">
+                    + ADD ROOM
+                </a>
+
+            </div>
+
+
+            <div class="table-wrapper">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+                            <th>ROOM</th>
+                            <th>TYPE</th>
+                            <th>PRICE</th>
+                            <th>AVAILABILITY</th>
+                            <th>ACTION</th>
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        {% for room in rooms %}
+
+                        <tr>
+
+                            <td>
+                                {{ room.room_number }}
+                            </td>
+
+                            <td>
+                                {{ room.room_type.name }}
+                            </td>
+
+                            <td>
+                                ₹{{ room.room_type.price }}
+                            </td>
+
+                            <td>
+
+                                {% if room.is_available %}
+
+                                    <span class="status active">
+                                        AVAILABLE
+                                    </span>
+
+                                {% else %}
+
+                                    <span class="status inactive">
+                                        UNAVAILABLE
+                                    </span>
+
+                                {% endif %}
+
+                            </td>
+
+                            <td>
+
+                                <a
+                                    href="{% url 'room_edit' room.id %}"
+                                    class="edit-btn"
+                                >
+                                    EDIT
+                                </a>
+
+                            </td>
+
+                        </tr>
+
+                        {% empty %}
+
+                        <tr>
+                            <td colspan="5">
+                                No rooms found.
+                            </td>
+                        </tr>
+
+                        {% endfor %}
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+
+        <!-- BOOKINGS -->
+        <section class="admin-section">
+
+            <div class="section-heading">
+
+                <div>
+                    <span class="section-label">
+                        RESERVATION MANAGEMENT
+                    </span>
+
+                    <h2>
+                        Recent Bookings
+                    </h2>
+                </div>
+
+            </div>
+
+
+            <div class="table-wrapper">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+                            <th>GUEST</th>
+                            <th>ROOM</th>
+                            <th>CHECK IN</th>
+                            <th>CHECK OUT</th>
+                            <th>GUESTS</th>
+                            <th>STATUS</th>
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        {% for booking in bookings %}
+
+                        <tr>
+
+                            <td>
+                                {{ booking.user.name }}
+                            </td>
+
+                            <td>
+                                {{ booking.room.room_number }}
+                            </td>
+
+                            <td>
+                                {{ booking.check_in }}
+                            </td>
+
+                            <td>
+                                {{ booking.check_out }}
+                            </td>
+
+                            <td>
+                                {{ booking.guests }}
+                            </td>
+
+                            <td>
+                                <span class="status">
+                                    {{ booking.status|upper }}
+                                </span>
+                            </td>
+
+                        </tr>
+
+                        {% empty %}
+
+                        <tr>
+                            <td colspan="6">
+                                No bookings found.
+                            </td>
+                        </tr>
+
+                        {% endfor %}
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- FOOTER -->
+    <footer>
+
+        <span>
+            MAISON ROYALE
+        </span>
+
+        <a href="{% url 'userpage' %}">
+            RETURN TO WEBSITE →
+        </a>
+
+    </footer>
+
+</body>
+</html>

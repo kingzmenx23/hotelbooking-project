@@ -1,0 +1,357 @@
+{% load static %}
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+<title>Maison Royale | Staff Dashboard</title>
+
+<link rel="stylesheet" href="{% static 'css/staff.css' %}">
+
+
+</head>
+
+<body>
+
+<!-- ================= HEADER ================= -->
+
+<header class="staff-header">
+
+
+<div class="brand">
+    <span>MAISON</span>
+    <strong>ROYALE</strong>
+</div>
+
+<div class="staff-user">
+    <span>STAFF · {{ request.session.staff_name }}</span>
+
+    <a href="{% url 'staff_logout' %}">
+        LOGOUT
+    </a>
+</div>
+
+
+</header>
+
+<!-- ================= MAIN ================= -->
+
+<main class="staff-container">
+
+
+<!-- PAGE TITLE -->
+
+<section class="page-heading">
+
+    <p>MAISON ROYALE · STAFF CONTROL</p>
+
+    <h1>Staff Dashboard</h1>
+
+    <span>
+        Manage rooms, availability and guest reservations.
+    </span>
+
+</section>
+
+
+<!-- ================= STATS ================= -->
+
+<section class="stats-grid">
+
+    <div class="stat-card">
+
+        <span class="stat-label">
+            TOTAL ROOMS
+        </span>
+
+        <strong>
+            {{ rooms|length }}
+        </strong>
+
+    </div>
+
+
+    <div class="stat-card">
+
+        <span class="stat-label">
+            AVAILABLE ROOMS
+        </span>
+
+        <strong>
+            {{ available_rooms|length }}
+        </strong>
+
+    </div>
+
+
+    <div class="stat-card">
+
+        <span class="stat-label">
+            BOOKINGS
+        </span>
+
+        <strong>
+            {{ bookings|length }}
+        </strong>
+
+    </div>
+
+</section>
+
+
+<!-- ================= ROOMS ================= -->
+
+<section class="dashboard-section">
+
+    <div class="section-header">
+
+        <div>
+            <p>ROOM MANAGEMENT</p>
+            <h2>Rooms & Availability</h2>
+        </div>
+
+        <a href="{% url 'room_add' %}" class="primary-button">
+            + ADD ROOM
+        </a>
+
+    </div>
+
+
+    <div class="table-wrapper">
+
+        <table>
+
+            <thead>
+
+                <tr>
+                    <th>ROOM</th>
+                    <th>ROOM TYPE</th>
+                    <th>PRICE</th>
+                    <th>STATUS</th>
+                    <th>ACTION</th>
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                {% for room in rooms %}
+
+                <tr>
+
+                    <td>
+                        <strong>
+                            {{ room.room_number }}
+                        </strong>
+                    </td>
+
+                    <td>
+                        {{ room.room_type.name }}
+                    </td>
+
+                    <td>
+                        ₹{{ room.room_type.price }}
+                    </td>
+
+                    <td>
+
+                        {% if room.is_available %}
+
+                            <span class="status available">
+                                AVAILABLE
+                            </span>
+
+                        {% else %}
+
+                            <span class="status occupied">
+                                OCCUPIED
+                            </span>
+
+                        {% endif %}
+
+                    </td>
+
+                    <td>
+
+                        <a
+                            href="{% url 'room_edit' room.id %}"
+                            class="edit-button"
+                        >
+                            EDIT
+                        </a>
+
+                    </td>
+
+                </tr>
+
+                {% empty %}
+
+                <tr>
+
+                    <td colspan="5" class="empty">
+                        No rooms have been added yet.
+                    </td>
+
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</section>
+
+
+<!-- ================= BOOKINGS ================= -->
+
+<section class="dashboard-section">
+
+    <div class="section-header">
+
+        <div>
+            <p>RESERVATIONS</p>
+            <h2>Guest Bookings</h2>
+        </div>
+
+    </div>
+
+
+    <div class="table-wrapper">
+
+        <table>
+
+            <thead>
+
+                <tr>
+                    <th>GUEST</th>
+                    <th>ROOM</th>
+                    <th>CHECK-IN</th>
+                    <th>CHECK-OUT</th>
+                    <th>GUESTS</th>
+                    <th>STATUS</th>
+                    <th>ACTION</th>
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                {% for booking in bookings %}
+
+                <tr>
+
+                    <td>
+                        {{ booking.user.name }}
+                    </td>
+
+                    <td>
+                        {{ booking.room.room_number }}
+                    </td>
+
+                    <td>
+                        {{ booking.check_in }}
+                    </td>
+
+                    <td>
+                        {{ booking.check_out }}
+                    </td>
+
+                    <td>
+                        {{ booking.guests }}
+                    </td>
+
+                    <td>
+
+                        <span class="booking-status {{ booking.status }}">
+                            {{ booking.status|upper }}
+                        </span>
+
+                    </td>
+
+                    <td>
+
+                        <form
+                            method="post"
+                            action="{% url 'booking_status' booking.id %}"
+                            class="status-form"
+                        >
+
+                            {% csrf_token %}
+
+                            <select name="status">
+
+                                <option value="pending"
+                                    {% if booking.status == "pending" %}selected{% endif %}>
+                                    Pending
+                                </option>
+
+                                <option value="confirmed"
+                                    {% if booking.status == "confirmed" %}selected{% endif %}>
+                                    Confirmed
+                                </option>
+
+                                <option value="cancelled"
+                                    {% if booking.status == "cancelled" %}selected{% endif %}>
+                                    Cancelled
+                                </option>
+
+                            </select>
+
+                            <button type="submit">
+                                UPDATE
+                            </button>
+
+                        </form>
+
+                    </td>
+
+                </tr>
+
+                {% empty %}
+
+                <tr>
+
+                    <td colspan="7" class="empty">
+                        No bookings available.
+                    </td>
+
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</section>
+
+
+</main>
+
+<!-- ================= FOOTER ================= -->
+
+<footer class="staff-footer">
+
+
+<span>
+    MAISON ROYALE
+</span>
+
+<p>
+    Staff Management System · {{ request.session.staff_name }}
+</p>
+
+
+</footer>
+
+</body>
+</html>

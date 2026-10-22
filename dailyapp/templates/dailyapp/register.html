@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>REGISTER</h1>
+    <form method="post" onsubmit="return validate()">
+        {% csrf_token %}
+        <label>Name: </label>
+        <input type="text" name="name" id="name" required><br>
+        <label>Email: </label>
+        <input type="email" name="email" id="email" required><br>
+        <label>Password: </label>
+        <p>
+                    At least one lowercase
+                    At least one uppercase 
+                    At least one digit
+                    At least 8 characters
+        </p>
+        <input type="text" name="password" id="password" required><br>
+        <label>Age: </label>
+        <input type="number" name="age" id="age" required><br>
+        <label>Gender: </label>
+        <input type="radio" name="gender" value="male"> Male
+        <input type="radio" name="gender" value="female"> Female<br>
+        <label>Phone Number:</label>
+        <input type="tel" name="phn" id="phn" required><br>
+        <button type="submit">REGISTER</button>
+    </form>
+    <script>
+
+        function validate(){
+            let name = document.getElementById('name').value;
+            const password = document.getElementById('password').value;
+            let age = document.getElementById('age').value;
+            // let phn = document.getElementById('phn').value;
+
+            if (!/^[a-zA-Z ]{3,}$/.test(name)) {     <!--the minimum 3 is not working-->
+                alert("Name Should in Character")
+                return false;
+            }
+
+            const pass = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/;
+
+            if (!pass.test(password)) {
+                alert("Inalid Password")
+                return false
+            }   
+            
+            if (!/^[0-9]+$/.test(age)) {
+                alert("Age should be in Numerals")
+                return false
+            }
+            return true
+            
+        }
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,556 @@
+body {
+    background: rgb(138, 167, 173) !important;
+}
+
+/* =========================================================
+MAISON ROYALE — STAFF DASHBOARD
+========================================================= */
+
+/* ================= RESET ================= */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  }
+
+html {
+scroll-behavior: smooth;
+}
+
+body {
+background: #f5f3ef;
+color: #171717;
+font-family: "Inter", sans-serif;
+font-weight: 300;
+}
+
+a {
+color: inherit;
+text-decoration: none;
+}
+
+button,
+select {
+font-family: inherit;
+}
+
+button {
+cursor: pointer;
+}
+
+/* ================= HEADER ================= */
+
+.staff-header {
+height: 90px;
+padding: 0 6%;
+display: flex;
+align-items: center;
+justify-content: space-between;
+
+
+background: #f5f3ef;
+border-bottom: 1px solid #d8d4cc;
+
+
+}
+
+/* ================= BRAND ================= */
+
+.brand {
+display: flex;
+flex-direction: column;
+line-height: 0.85;
+letter-spacing: 5px;
+}
+
+.brand span {
+font-family: "Cormorant Garamond", serif;
+font-size: 14px;
+letter-spacing: 7px;
+}
+
+.brand strong {
+font-family: "Cormorant Garamond", serif;
+font-size: 28px;
+font-weight: 500;
+letter-spacing: 8px;
+}
+
+/* ================= STAFF USER ================= */
+
+.staff-user {
+display: flex;
+align-items: center;
+gap: 30px;
+
+
+font-size: 11px;
+letter-spacing: 2px;
+
+
+}
+
+.staff-user span {
+color: #555;
+}
+
+.staff-user a {
+padding-bottom: 5px;
+border-bottom: 1px solid #171717;
+
+
+transition: opacity 0.3s ease;
+
+
+}
+
+.staff-user a:hover {
+opacity: 0.5;
+}
+
+/* ================= MAIN CONTAINER ================= */
+
+.staff-container {
+width: 88%;
+max-width: 1500px;
+margin: 0 auto;
+padding: 75px 0 100px;
+}
+
+/* ================= PAGE HEADING ================= */
+
+.page-heading {
+margin-bottom: 55px;
+}
+
+.page-heading p {
+margin-bottom: 12px;
+
+
+font-size: 10px;
+letter-spacing: 4px;
+color: #777;
+
+
+}
+
+.page-heading h1 {
+font-family: "Cormorant Garamond", serif;
+font-size: clamp(48px, 6vw, 78px);
+font-weight: 400;
+line-height: 0.95;
+margin-bottom: 20px;
+}
+
+.page-heading span {
+font-size: 13px;
+color: #777;
+letter-spacing: 0.5px;
+}
+
+/* ================= STATS ================= */
+
+.stats-grid {
+display: grid;
+grid-template-columns: repeat(3, 1fr);
+gap: 1px;
+
+
+background: #d8d4cc;
+border: 1px solid #d8d4cc;
+
+margin-bottom: 75px;
+
+
+}
+
+.stat-card {
+min-height: 150px;
+padding: 30px;
+
+
+background: #f5f3ef;
+
+display: flex;
+flex-direction: column;
+justify-content: space-between;
+
+
+}
+
+.stat-label {
+font-size: 10px;
+letter-spacing: 3px;
+color: #777;
+}
+
+.stat-card strong {
+font-family: "Cormorant Garamond", serif;
+font-size: 48px;
+font-weight: 400;
+}
+
+/* ================= DASHBOARD SECTION ================= */
+
+.dashboard-section {
+margin-bottom: 75px;
+}
+
+.section-header {
+display: flex;
+align-items: flex-end;
+justify-content: space-between;
+
+
+margin-bottom: 25px;
+
+
+}
+
+.section-header p {
+font-size: 10px;
+letter-spacing: 3px;
+color: #777;
+margin-bottom: 8px;
+}
+
+.section-header h2 {
+font-family: "Cormorant Garamond", serif;
+font-size: 38px;
+font-weight: 400;
+}
+
+/* ================= ADD BUTTON ================= */
+
+.primary-button {
+display: inline-flex;
+align-items: center;
+justify-content: center;
+
+
+min-width: 130px;
+padding: 13px 22px;
+
+background: #171717;
+color: #fff;
+
+font-size: 10px;
+letter-spacing: 2px;
+
+transition:
+    background 0.3s ease,
+    color 0.3s ease;
+
+
+}
+
+.primary-button:hover {
+background: #d8d4cc;
+color: #171717;
+}
+
+/* ================= TABLE ================= */
+
+.table-wrapper {
+width: 100%;
+overflow-x: auto;
+
+
+border-top: 1px solid #171717;
+border-bottom: 1px solid #d8d4cc;
+
+
+}
+
+table {
+width: 100%;
+border-collapse: collapse;
+min-width: 850px;
+}
+
+thead {
+background: #ebe8e2;
+}
+
+th {
+padding: 17px 15px;
+
+
+text-align: left;
+
+font-size: 9px;
+font-weight: 500;
+letter-spacing: 2px;
+color: #555;
+
+border-bottom: 1px solid #d8d4cc;
+
+
+}
+
+td {
+padding: 20px 15px;
+
+
+font-size: 12px;
+
+border-bottom: 1px solid #dedbd5;
+
+
+}
+
+tbody tr {
+transition: background 0.2s ease;
+}
+
+tbody tr:hover {
+background: #ebe8e2;
+}
+
+td strong {
+font-weight: 500;
+}
+
+/* ================= ROOM STATUS ================= */
+
+.status {
+display: inline-block;
+
+
+padding: 6px 10px;
+
+font-size: 9px;
+letter-spacing: 1.5px;
+
+
+}
+
+.status.available {
+background: #e4ebe3;
+color: #315235;
+}
+
+.status.occupied {
+background: #eee2df;
+color: #704139;
+}
+
+/* ================= EDIT BUTTON ================= */
+
+.edit-button {
+display: inline-block;
+
+
+padding: 8px 13px;
+
+border: 1px solid #bdb9b2;
+
+font-size: 9px;
+letter-spacing: 1.5px;
+
+transition: all 0.3s ease;
+
+
+}
+
+.edit-button:hover {
+background: #171717;
+border-color: #171717;
+color: #fff;
+}
+
+/* ================= BOOKING STATUS ================= */
+
+.booking-status {
+display: inline-block;
+
+
+padding: 6px 9px;
+
+font-size: 8px;
+letter-spacing: 1.3px;
+
+
+}
+
+.booking-status.pending {
+background: #eee9dc;
+color: #69582e;
+}
+
+.booking-status.confirmed {
+background: #e3ebe4;
+color: #31543a;
+}
+
+.booking-status.cancelled {
+background: #eee1df;
+color: #704039;
+}
+
+/* ================= STATUS FORM ================= */
+
+.status-form {
+display: flex;
+align-items: center;
+gap: 8px;
+}
+
+.status-form select {
+min-width: 105px;
+
+
+padding: 8px 9px;
+
+background: #f5f3ef;
+border: 1px solid #c9c5bd;
+
+font-size: 10px;
+color: #333;
+
+outline: none;
+
+
+}
+
+.status-form select:focus {
+border-color: #171717;
+}
+
+.status-form button {
+padding: 8px 11px;
+
+
+background: #171717;
+border: 1px solid #171717;
+color: #fff;
+
+font-size: 8px;
+letter-spacing: 1.2px;
+
+transition: all 0.3s ease;
+
+
+}
+
+.status-form button:hover {
+background: #d8d4cc;
+border-color: #d8d4cc;
+color: #171717;
+}
+
+/* ================= EMPTY STATE ================= */
+
+.empty {
+padding: 45px 20px;
+
+
+text-align: center;
+
+color: #888;
+
+font-size: 12px;
+letter-spacing: 0.5px;
+
+
+}
+
+/* ================= FOOTER ================= */
+
+.staff-footer {
+padding: 35px 6%;
+
+
+border-top: 1px solid #d8d4cc;
+
+display: flex;
+align-items: center;
+justify-content: space-between;
+
+
+}
+
+.staff-footer span {
+font-family: "Cormorant Garamond", serif;
+font-size: 18px;
+letter-spacing: 4px;
+}
+
+.staff-footer p {
+font-size: 10px;
+letter-spacing: 1px;
+color: #888;
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media (max-width: 900px) {
+
+
+.staff-container {
+    width: 92%;
+    padding-top: 55px;
+}
+
+.stats-grid {
+    grid-template-columns: 1fr;
+}
+
+.section-header {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.primary-button {
+    width: 100%;
+}
+
+.staff-user span {
+    display: none;
+}
+
+.staff-header {
+    padding: 0 4%;
+}
+
+.staff-footer {
+    padding: 30px 4%;
+    flex-direction: column;
+    gap: 15px;
+    text-align: center;
+}
+
+
+}
+
+@media (max-width: 600px) {
+
+
+.staff-header {
+    height: 75px;
+}
+
+.brand strong {
+    font-size: 23px;
+}
+
+.page-heading h1 {
+    font-size: 50px;
+}
+
+.section-header h2 {
+    font-size: 32px;
+}
+
+.stat-card {
+    min-height: 125px;
+}
+
+.stat-card strong {
+    font-size: 40px;
+}
+
+
+}

@@ -1,0 +1,69 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1.0">
+        <title>{{ room_type.name }} | Maison Royale</title>
+        <link rel="stylesheet" href="{% static 'css/room_detail.css' %}">
+    </head>
+    <body>
+        <header class="top">
+            <a href="{% url 'userpage' %}" class="logo">
+                MAISON 
+                <small>ROYALE</small>
+            </a>
+            <a href="{% url 'availability' %}" class="back">
+                ← BACK TO ROOMS
+            </a>
+        </header>
+        <main>
+            <section class="hero">
+                <div class="hero-image room-image-{{ room_type.id }}">
+
+                </div>
+                <div class="copy">
+                    <span>MAISON ROYALE · ROOM & SUITE</span>
+                    <h1>{{ room_type.name }}</h1>
+                    <p>{{ room_type.description }}</p>
+                    <div class="price">₹{{ room_type.price }} 
+                        <small>/ NIGHT</small>
+                    </div>
+                    <a class="button" href="{% url 'booking' %}?room_type={{ room_type.id }}">
+                        BOOK NOW →
+                    </a>
+                </div>
+            </section>
+            <section class="details">
+                <div>
+                    <span>ROOM SIZE</span>
+                    <strong>45–70 m²</strong>
+                </div>
+                <div>
+                    <span>GUESTS</span>
+                    <strong>Up to 4</strong>
+                </div>
+                <div>
+                    <span>BED</span>
+                    <strong>King Bed</strong>
+                </div>
+                <div>
+                    <span>VIEW</span>
+                    <strong>City / Palace</strong>
+                </div>
+            </section>
+            <section class="amenities">
+                <span>AMENITIES</span>
+                <h2>Thoughtful comfort, beautifully considered.</h2>
+                <div class="grid">
+                    <p>01 · Complimentary Wi-Fi</p>
+                    <p>02 · Premium Bath Amenities</p>
+                    <p>03 · In-room Dining</p>
+                    <p>04 · Daily Housekeeping</p>
+                    <p>05 · Smart TV & Work Desk</p>
+                    <p>06 · 24-hour Guest Service</p>
+                </div>
+            </section>
+        </main>
+    </body>
+</html>

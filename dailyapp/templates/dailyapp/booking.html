@@ -1,0 +1,1094 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Book Your Stay | Maison Royale</title>
+
+    <!-- GOOGLE FONTS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500&family=Inter:wght@300;400&display=swap"
+        rel="stylesheet"
+    >
+
+    <!-- BOOKING CSS -->
+    <link rel="stylesheet" href="{% static 'css/booking.css' %}">
+
+</head>
+
+
+<body>
+
+
+<!-- =========================================================
+ANNOUNCEMENT
+========================================================= -->
+
+<div class="announcement">
+
+    <span>
+        Exclusive summer experiences · Book directly with us
+    </span>
+
+    <button class="announcement-close">
+        ×
+    </button>
+
+</div>
+
+
+
+<!-- =========================================================
+NAVBAR
+========================================================= -->
+
+<header class="navbar">
+
+    <div class="nav-left">
+
+        <button class="menu-btn" id="menuBtn">
+
+            <span></span>
+            <span></span>
+            <span></span>
+
+        </button>
+
+        <span class="menu-label">
+            MENU
+        </span>
+
+    </div>
+
+
+    <a href="{% url 'userpage' %}" class="logo">
+
+        MAISON
+
+        <small>
+            ROYALE
+        </small>
+
+    </a>
+
+
+    <div class="nav-right">
+
+        <a href="{% url 'userpage' %}" class="nav-link">
+            HOME
+        </a>
+
+        <a href="#" class="book-btn">
+            BOOK NOW
+        </a>
+
+    </div>
+
+</header>
+
+
+
+<!-- =========================================================
+SIDE MENU
+========================================================= -->
+
+<div class="menu-overlay" id="menuOverlay"></div>
+
+
+<aside class="side-menu" id="sideMenu">
+
+    <button class="close-menu" id="closeMenu">
+        ×
+    </button>
+
+
+    <div class="side-content">
+
+        <span class="menu-small">
+            MAISON ROYALE
+        </span>
+
+
+        <nav>
+
+            <a href="{% url 'userpage' %}">
+                HOME
+            </a>
+
+            <a href="{% url 'availability' %}">
+                ROOMS
+            </a>
+
+            <a href="#">
+                DINING
+            </a>
+
+            <a href="#">
+                EXPERIENCES
+            </a>
+
+            <a href="#">
+                CONTACT
+            </a>
+
+        </nav>
+
+
+        <div class="side-bottom">
+
+            <span>
+                INSTAGRAM
+            </span>
+
+            <span>
+                FACEBOOK
+            </span>
+
+        </div>
+
+    </div>
+
+</aside>
+
+
+
+<!-- =========================================================
+BOOKING HEADER
+========================================================= -->
+
+<section class="booking-header">
+
+    <span class="section-label">
+        RESERVATION
+    </span>
+
+
+    <h1>
+        Book Your Stay
+    </h1>
+
+
+    <p>
+        Experience refined comfort and timeless hospitality
+        at Maison Royale.
+    </p>
+
+</section>
+
+
+
+<!-- =========================================================
+BOOKING CONTENT
+========================================================= -->
+
+<main class="booking-container">
+
+
+    <!-- =====================================================
+    STAY DETAILS
+    ====================================================== -->
+
+    <section class="stay-section">
+
+        <div class="section-top">
+
+            <div>
+
+                <span class="section-number">
+                    01
+                </span>
+
+                <h2>
+                    Your Stay
+                </h2>
+
+            </div>
+
+
+            <button
+                type="button"
+                class="edit-btn"
+                id="editStay"
+            >
+                EDIT
+            </button>
+
+        </div>
+
+
+        <form
+            method="POST"
+            action="{% url 'booking' %}"
+            id="stayForm"
+        >
+
+            {% csrf_token %}
+
+
+            <div class="stay-details">
+
+
+                <!-- CHECK-IN -->
+
+                <div class="stay-item">
+
+                    <span>
+                        CHECK-IN
+                    </span>
+
+                    <input
+                        type="date"
+                        name="check_in"
+                        value="{{ check_in }}"
+                        id="checkIn"
+                        readonly
+                    >
+
+                </div>
+
+
+                <!-- CHECK-OUT -->
+
+                <div class="stay-item">
+
+                    <span>
+                        CHECK-OUT
+                    </span>
+
+                    <input
+                        type="date"
+                        name="check_out"
+                        value="{{ check_out }}"
+                        id="checkOut"
+                        readonly
+                    >
+
+                </div>
+
+
+                <!-- GUESTS -->
+
+                <div class="stay-item">
+
+                    <span>
+                        GUESTS
+                    </span>
+
+                <select id="guests" name="guests">
+
+                    <option value="1">1 Guest</option>
+                    <option value="2" selected>2 Guests</option>
+                    <option value="3">3 Guests</option>
+                    <option value="4">4 Guests</option>
+                    <option value="5">5+ Guests</option>
+
+                </select>
+
+                </div>
+
+            </div>
+
+
+            <!-- UPDATE BUTTON -->
+
+            <button
+                type="submit"
+                class="update-btn"
+                id="updateStay"
+                style="display: none;"
+            >
+                UPDATE
+            </button>
+
+
+            <!-- BOOK NOW BUTTON -->
+
+        <a
+            href="#confirmbook"
+            class="book-now-btn"
+            id="bookNow"
+        >
+            BOOK NOW
+        </a>
+
+        </form>
+
+    </section>
+
+
+
+
+
+<!-- =====================================================
+     YOUR ROOM
+====================================================== -->
+
+<section class="room-section">
+
+    <div class="section-top">
+
+        <div>
+
+            <span class="section-number">
+                02
+            </span>
+
+            <h2>
+                Your Room
+            </h2>
+
+        </div>
+
+    </div>
+
+
+    <div class="selected-room">
+
+
+        <!-- ROOM IMAGE -->
+
+        <div class="selected-room-image">
+        </div>
+
+
+        <!-- ROOM INFORMATION -->
+
+        <div class="selected-room-content">
+
+            <span class="room-category">
+                {{ room_type.name|upper }}
+            </span>
+
+
+            <h3>
+                {{ room_type.name }}
+            </h3>
+
+
+            <p>
+                {{ room_type.description }}
+            </p>
+
+
+            <div class="room-features">
+
+                <span>
+                    45 M²
+                </span>
+
+                <span>
+                    {{ guests }} GUESTS
+                </span>
+
+                <span>
+                    KING BED
+                </span>
+
+            </div>
+
+
+            <div class="room-price">
+
+                <strong>
+                    ₹{{ room_type.price }}
+                </strong>
+
+                <span>
+                    / NIGHT
+                </span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+
+<!-- =====================================================
+     SELECT ROOM
+====================================================== -->
+
+<section class="select-section">
+
+    <div class="section-top">
+
+        <div>
+
+            <span class="section-number">
+                03
+            </span>
+
+            <h2>
+                Select Your Room
+            </h2>
+
+        </div>
+
+    </div>
+
+
+    {% for room in rooms %}
+
+    <label class="room-option">
+
+        <input
+            type="radio"
+            name="room"
+            value="{{ room.id }}"
+            {% if forloop.first %}checked{% endif %}
+        >
+
+
+        <div class="room-option-content">
+
+            <div>
+
+                <span class="room-number">
+                    ROOM {{ room.room_number }}
+                </span>
+
+                <h3>
+                    {{ room.room_type.name }}
+                </h3>
+
+                <p>
+                    {{ room.room_type.description }}
+                </p>
+
+            </div>
+
+
+            <div class="room-option-right">
+
+                <strong>
+                    ₹{{ room.room_type.price }}
+                </strong>
+
+                <span>
+                    / NIGHT
+                </span>
+
+                <span class="select-circle"></span>
+
+            </div>
+
+        </div>
+
+    </label>
+
+    {% empty %}
+
+    <p>
+        No rooms are currently available.
+    </p>
+
+    {% endfor %}
+
+</section>
+
+
+
+
+
+    <!-- =====================================================
+    BOOKING SUMMARY
+    ====================================================== -->
+
+<section class="summary-section" id="confirmbook">
+
+    <div class="summary-left">
+
+        <span class="section-number">
+            04
+        </span>
+
+        <h2>
+            Your Stay
+        </h2>
+
+    </div>
+
+
+    <div class="summary-right">
+
+        <!-- ROOM + NIGHTS -->
+
+        <div class="summary-line">
+
+            <span>
+                {{ room_type.name|upper }}
+            </span>
+
+            <span>
+                ₹{{ room_type.price }} ×
+                <span id="summaryNights">0</span>
+                NIGHTS
+            </span>
+
+        </div>
+
+
+        <!-- SELECTED ROOM -->
+
+        <div class="summary-line">
+
+            <span id="summaryRoom">
+                ROOM —
+            </span>
+
+            <span>
+                INCLUDED
+            </span>
+
+        </div>
+
+
+        <!-- TOTAL -->
+
+        <div class="summary-total">
+
+            <span>
+                TOTAL
+            </span>
+
+            <strong id="summaryTotal">
+                ₹0
+            </strong>
+
+        </div>
+
+
+        <button
+            type="button"
+            class="confirm-btn"
+            id="confirmBooking"
+        >
+            CONFIRM BOOKING
+            <span>→</span>
+        </button>
+
+    </div>
+
+</section>
+
+</main>
+
+
+<!-- =========================================================
+FOOTER
+========================================================= -->
+
+<footer>
+
+    <div class="footer-main">
+
+
+        <div class="footer-brand">
+
+            <a
+                href="{% url 'userpage' %}"
+                class="logo footer-logo"
+            >
+
+                MAISON
+
+                <small>
+                    ROYALE
+                </small>
+
+            </a>
+
+
+            <p>
+                A timeless destination where refined hospitality,
+                thoughtful design and exceptional experiences
+                come together.
+            </p>
+
+        </div>
+
+
+
+        <div class="footer-column">
+
+            <h4>
+                EXPLORE
+            </h4>
+
+            <a href="{% url 'userpage' %}">
+                Home
+            </a>
+
+            <a href="{% url 'availability' %}">
+                Rooms
+            </a>
+
+            <a href="#">
+                Dining
+            </a>
+
+        </div>
+
+
+
+        <div class="footer-column">
+
+            <h4>
+                INFORMATION
+            </h4>
+
+            <a href="#">
+                Contact
+            </a>
+
+            <a href="#">
+                Privacy
+            </a>
+
+            <a href="#">
+                Terms
+            </a>
+
+        </div>
+
+
+
+        <div class="footer-column">
+
+            <h4>
+                FOLLOW
+            </h4>
+
+            <a href="#">
+                Instagram
+            </a>
+
+            <a href="#">
+                Facebook
+            </a>
+
+        </div>
+
+
+    </div>
+
+
+
+    <div class="footer-bottom">
+
+        <span>
+            © 2026 MAISON ROYALE
+        </span>
+
+
+        <div>
+
+            <span>
+                PRIVACY
+            </span>
+
+            <span>
+                TERMS
+            </span>
+
+        </div>
+
+    </div>
+
+</footer>
+
+
+
+
+<!-- =========================================================
+JAVASCRIPT
+========================================================= -->
+
+<script>
+
+    /* =========================
+       SIDE MENU
+    ========================= */
+
+    const menuBtn =
+        document.getElementById("menuBtn");
+
+    const closeMenu =
+        document.getElementById("closeMenu");
+
+    const sideMenu =
+        document.getElementById("sideMenu");
+
+    const menuOverlay =
+        document.getElementById("menuOverlay");
+
+
+    if (menuBtn) {
+
+        menuBtn.addEventListener("click", () => {
+
+            sideMenu.classList.add("active");
+
+            menuOverlay.classList.add("active");
+
+        });
+
+    }
+
+
+    if (closeMenu) {
+
+        closeMenu.addEventListener("click", () => {
+
+            sideMenu.classList.remove("active");
+
+            menuOverlay.classList.remove("active");
+
+        });
+
+    }
+
+
+    if (menuOverlay) {
+
+        menuOverlay.addEventListener("click", () => {
+
+            sideMenu.classList.remove("active");
+
+            menuOverlay.classList.remove("active");
+
+        });
+
+    }
+
+
+
+    /* =========================
+       NAVBAR SCROLL
+    ========================= */
+
+    window.addEventListener("scroll", () => {
+
+        const navbar =
+            document.querySelector(".navbar");
+
+
+        if (!navbar) return;
+
+
+        if (window.scrollY > 50) {
+
+            navbar.classList.add("scrolled");
+
+        } else {
+
+            navbar.classList.remove("scrolled");
+
+        }
+
+    });
+
+
+
+    /* =========================
+       EDIT STAY
+    ========================= */
+
+    const editStay =
+        document.getElementById("editStay");
+
+    const updateStay =
+        document.getElementById("updateStay");
+
+    const bookNow =
+        document.getElementById("bookNow");
+
+    const checkIn =
+        document.getElementById("checkIn");
+
+    const checkOut =
+        document.getElementById("checkOut");
+
+    const guests =
+        document.getElementById("guests");
+
+
+    if (editStay) {
+
+        editStay.addEventListener("click", () => {
+
+
+            /* Enable date fields */
+
+            checkIn.readOnly = false;
+
+            checkOut.readOnly = false;
+
+
+            /* Enable guest selection */
+
+            guests.disabled = false;
+
+
+            /* Add editing style */
+
+            document
+                .querySelectorAll(".stay-item")
+                .forEach(item => {
+
+                    item.classList.add("editing");
+
+                });
+
+
+            /* Show UPDATE */
+
+            updateStay.style.display = "block";
+
+
+            /* Hide BOOK NOW */
+
+            bookNow.style.display = "none";
+
+
+            /* Hide EDIT */
+
+            editStay.style.display = "none";
+
+        });
+
+    }
+
+
+
+    /* =========================
+       BOOKING CALCULATION
+    ========================= */
+
+    const summaryNights =
+        document.getElementById("summaryNights");
+
+    const summaryTotal =
+        document.getElementById("summaryTotal");
+
+    const summaryRoom =
+        document.getElementById("summaryRoom");
+
+
+    /* RoomType price from Django */
+
+    const roomPrice =
+        Number("{{ room_type.price }}");
+
+
+
+    function calculateBooking() {
+
+        if (
+            !checkIn ||
+            !checkOut ||
+            !summaryNights ||
+            !summaryTotal
+        ) {
+
+            return;
+
+        }
+
+
+        if (
+            !checkIn.value ||
+            !checkOut.value
+        ) {
+
+            summaryNights.textContent = "0";
+
+            summaryTotal.textContent = "₹0";
+
+            return;
+
+        }
+
+
+        const startDate =
+            new Date(checkIn.value);
+
+        const endDate =
+            new Date(checkOut.value);
+
+
+        const difference =
+            endDate.getTime() -
+            startDate.getTime();
+
+
+        const nights =
+            Math.ceil(
+                difference /
+                (1000 * 60 * 60 * 24)
+            );
+
+
+        /* Invalid dates */
+
+        if (nights <= 0) {
+
+            summaryNights.textContent = "0";
+
+            summaryTotal.textContent = "₹0";
+
+            return;
+
+        }
+
+
+        /* Calculate total */
+
+        const total =
+            roomPrice * nights;
+
+
+        /* Display nights */
+
+        summaryNights.textContent =
+            nights;
+
+
+        /* Display total */
+
+        summaryTotal.textContent =
+            "₹" +
+            total.toLocaleString("en-IN");
+
+    }
+
+
+
+    /* =========================
+       SELECTED ROOM
+    ========================= */
+
+    const roomInputs =
+        document.querySelectorAll(
+            'input[name="room"]'
+        );
+
+
+    roomInputs.forEach(function(room) {
+
+        room.addEventListener(
+            "change",
+            function() {
+
+
+                const selectedRoom =
+                    document.querySelector(
+                        'input[name="room"]:checked'
+                    );
+
+
+                if (
+                    selectedRoom &&
+                    summaryRoom
+                ) {
+
+                    summaryRoom.textContent =
+                        "ROOM " +
+                        selectedRoom.value;
+
+                }
+
+            }
+        );
+
+    });
+
+
+
+    /* =========================
+       INITIAL CALCULATION
+    ========================= */
+
+    calculateBooking();
+
+
+
+    /* =========================
+       RECALCULATE ON DATE CHANGE
+    ========================= */
+
+    if (checkIn) {
+
+        checkIn.addEventListener(
+            "change",
+            calculateBooking
+        );
+
+    }
+
+
+    if (checkOut) {
+
+        checkOut.addEventListener(
+            "change",
+            calculateBooking
+        );
+
+    }
+
+
+
+    /* =========================
+       SHOW FIRST ROOM
+    ========================= */
+
+    const firstRoom =
+        document.querySelector(
+            'input[name="room"]:checked'
+        );
+
+
+    if (
+        firstRoom &&
+        summaryRoom
+    ) {
+
+        summaryRoom.textContent =
+            "ROOM " +
+            firstRoom.value;
+
+    }
+
+
+    const confirmBooking = document.getElementById('confirmBooking');
+    if (confirmBooking) {
+        confirmBooking.addEventListener('click', function () {
+            const amount = document.getElementById('summaryTotal')?.textContent.replace(/[^0-9.]/g, '') || '0';
+            const roomName = encodeURIComponent('{{ room_type.name }}');
+            const checkInValue = encodeURIComponent(document.getElementById('checkIn')?.value || '');
+            const checkOutValue = encodeURIComponent(document.getElementById('checkOut')?.value || '');
+            window.location.href = `{% url 'payment' %}?room_name=${roomName}&amount=${amount}&check_in=${checkInValue}&check_out=${checkOutValue}`;
+        });
+    }
+
+</script>
+
+
+
+
+
+</body>
+
+</html>

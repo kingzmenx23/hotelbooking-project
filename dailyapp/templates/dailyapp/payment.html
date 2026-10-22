@@ -1,0 +1,83 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1.0">
+        <title>Payment | Maison Royale</title>
+        <link rel="stylesheet" href="{% static 'css/payment.css' %}">
+    </head>
+    <body>
+        <header>
+            <a href="{% url 'userpage' %}" class="logo">MAISON <small>ROYALE</small></a>
+            <span>SECURE RESERVATION</span>
+        </header>
+        <main>
+            <section class="heading">
+                <span>04 · PAYMENT</span>
+                <h1>Complete Your Stay</h1>
+                <p>This is a secure demo payment page for the Maison Royale booking experience.</p>
+            </section>
+            <section class="checkout">
+                <div class="summary">
+                    <span>YOUR RESERVATION</span>
+                    <h2>{{ room_name }}</h2>
+                    <p>{{ check_in|default:'—' }} &nbsp;→&nbsp; {{ check_out|default:'—' }}</p>
+                    <div class="total">
+                        <span>TOTAL</span>
+                        <strong>₹{{ amount }}</strong>
+                    </div>
+                </div>
+                <form id="paymentForm">
+                    <label>
+                        CARDHOLDER NAME
+                        <input required placeholder="Full name">
+                    </label>
+                    <label>
+                        CARD NUMBER<input required maxlength="19" placeholder="0000 0000 0000 0000">
+                    </label>
+                    <div class="row">
+                        <label>
+                            EXPIRY<input required placeholder="MM / YY">
+                        </label>
+                        <label>
+                            CVV<input required maxlength="4" placeholder="•••">
+                        </label>
+                    </div>
+                    <button type="submit">PAY ₹{{ amount }} →</button>
+                    <p class="note">Demo only · No real payment will be processed.</p>
+                </form>
+            </section>
+        </main>
+<script>
+
+    const paymentForm = document.getElementById("paymentForm");
+
+    paymentForm.addEventListener("submit", function (event) {
+
+        event.preventDefault();
+
+        this.innerHTML = `
+            <div class="success">
+
+                <span>PAYMENT COMPLETE</span>
+
+                <h2>
+                    Your reservation is confirmed.
+                </h2>
+
+                <p>
+                    Thank you for choosing Maison Royale.
+                </p>
+
+                <a href="{% url 'userpage' %}">
+                    RETURN HOME →
+                </a>
+
+            </div>
+        `;
+
+    });
+
+</script>
+
